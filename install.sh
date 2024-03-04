@@ -1,5 +1,7 @@
 #!/bin/sh
 
+NODE_VERSION=${NODE_VERSION:---lts}
+
 # Init
 cd ~ && mkdir -p {Desktop,Documents,Downloads,Pictures,Pictures/Wallpapers,Videos}
 sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
@@ -17,7 +19,7 @@ sudo pacman -S --noconfirm linux-headers
 sudo pacman -S --noconfirm xorg xorg-server
 
 # Qtile
-sudo pacman -S --noconfirm qtile python-psutil
+sudo pacman -S --noconfirm qtile python-psutil python-dbus-next
 
 # Terminal
 sudo pacman -S --noconfirm kitty tmux fish starship
@@ -48,8 +50,12 @@ yay -S --noconfirm qogir-cursor-theme-git
 sudo pacman -S --noconfirm thunar thunar-volman thunar-archive-plugin
 
 # Languages programing
-yay -S --noconfirm fnm-bin go
-fnm install 20
+# go
+sudo pacman -S --noconfirm go
+
+# node
+yay -S --noconfirm fnm-bin
+fnm install $NODE_VERSION
 
 # Develop tools
 sudo pacman -S --noconfirm docker docker-compose docker-buildx
