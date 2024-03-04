@@ -24,6 +24,7 @@ sudo pacman -S --noconfirm kitty tmux fish starship
 
 # Editor
 sudo pacman -S --noconfirm vim neovim
+git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 
 # Fonts
 sudo pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code ttf-firacode-nerd ttf-iosevka-nerd ttf-liberation ttf-font-awesome
@@ -35,7 +36,7 @@ sudo pacman -S --noconfirm alsa-utils
 sudo pacman -S --noconfirm bluez bluez-utils blueman
 
 # Utilities
-sudo pacman -S --noconfirm picom lxappearance ly rofi jq wget htop maim xclip ripgrep fzf eza bat zoxide feh dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch
+sudo pacman -S --noconfirm picom lxappearance ly rofi jq wget htop maim xclip ripgrep fzf eza bat zoxide feh dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch ksuperkey
 yay -S --noconfirm betterlockscreen
 sudo systemctl enable ly # enable ly service
 
