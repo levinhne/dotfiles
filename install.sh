@@ -16,7 +16,7 @@ rm -rf yay-bin
 sudo pacman -S --noconfirm linux-headers
 
 # Xorg
-sudo pacman -S --noconfirm xorg xorg-server
+sudo pacman -S --noconfirm xorg xorg-server xcolor
 
 # Qtile
 sudo pacman -S --noconfirm qtile python-psutil python-dbus-next
