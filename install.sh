@@ -3,7 +3,7 @@
 NODE_VERSION=${NODE_VERSION:---lts}
 
 # Init
-cd ~ && mkdir -p {Desktop,Documents,Downloads,Pictures,Pictures/Wallpapers,Videos}
+cd ~ && mkdir -p {Desktop,Develop,Documents,Downloads,Pictures,Pictures/Wallpapers,Videos}
 sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
 
 # yay
@@ -58,6 +58,7 @@ yay -S --noconfirm fnm-bin
 fnm install $NODE_VERSION
 
 # Develop tools
+# docker
 sudo pacman -S --noconfirm docker docker-compose docker-buildx
 if [[ ! `getent group docker` ]]; then
   sudo groupadd docker
