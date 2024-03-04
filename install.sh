@@ -38,7 +38,7 @@ sudo pacman -S --noconfirm alsa-utils
 sudo pacman -S --noconfirm bluez bluez-utils blueman
 
 # Utilities
-sudo pacman -S --noconfirm picom lxappearance ly rofi jq wget htop maim xclip ripgrep fzf eza bat zoxide feh dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch ksuperkey
+sudo pacman -S --noconfirm picom lxappearance ly rofi jq wget htop maim xclip ripgrep fzf eza bat zoxide feh dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch ksuperkey stow
 yay -S --noconfirm betterlockscreen
 sudo systemctl enable ly # enable ly service
 
