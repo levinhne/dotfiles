@@ -244,7 +244,7 @@ screens = [
                 ),
                 widget.CPU(
                     font="Iosevka Nerd Font Light",
-                    format='{freq_current}GHz {load_percent}%'
+                    format='{freq_current}GHz {load_percent}%',
                 ),
                 widget.Spacer(
                     length=15
@@ -257,6 +257,7 @@ screens = [
                 widget.Memory(
                     font="Iosevka Nerd Font Light",
                     format="{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}",
+                    measure_mem = "G"
                 ),
                 widget.Spacer(
                     length=15
