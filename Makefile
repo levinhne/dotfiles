@@ -1,6 +1,5 @@
 NODE_VERSION ?= --lts
 
-
 folder:
 	cd ~ && mkdir -p {Desktop,Develop,Documents,Downloads,Pictures,Pictures/Wallpapers,Videos}
 	sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
@@ -52,7 +51,7 @@ install: folder yay
 
 docker:
 	sudo pacman -S --noconfirm docker docker-compose docker-buildx
-	sudo usermod -aG docker $$USER
+	sudo usermod -aG docker $(USER)
 
 go:
 	sudo pacman -S --noconfirm go
