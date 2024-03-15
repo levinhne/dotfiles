@@ -26,7 +26,7 @@ install: folder yay
 
 	# Editor
 	sudo pacman -S --noconfirm vim neovim
-	git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+  git clone https://github.com/NvChad/starter ~/.config/nvim
 
 	# Fonts
 	sudo pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code ttf-firacode-nerd ttf-iosevka-nerd ttf-liberation ttf-font-awesome
