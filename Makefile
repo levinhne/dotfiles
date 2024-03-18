@@ -23,6 +23,7 @@ install: folder yay
 
 	# Terminal
 	sudo pacman -S --noconfirm kitty tmux fish starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit
+	yay -S --noconfirm shell-color-scripts
 
 	# Editor
 	sudo pacman -S --noconfirm vim neovim
@@ -38,7 +39,7 @@ install: folder yay
 	sudo pacman -S --noconfirm bluez bluez-utils blueman
 
 	# Utilities
-	sudo pacman -S --noconfirm picom lxappearance ly rofi maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh
+	sudo pacman -S --noconfirm picom lxappearance ly rofi maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils
 	yay -S --noconfirm betterlockscreen ksuperkey
 	sudo systemctl enable ly # enable ly service
 
