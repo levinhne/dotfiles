@@ -11,7 +11,7 @@ yay:
 	cd ~/Downloads/yay-bin/ && makepkg -si
 	rm -rf yay-bin
 
-install: folder yay
+install:
 	# Linux headers
 	sudo pacman -S --noconfirm linux-headers
 
@@ -23,11 +23,6 @@ install: folder yay
 
 	# Terminal
 	sudo pacman -S --noconfirm kitty tmux fish starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit
-	yay -S --noconfirm shell-color-scripts
-
-	# Editor
-	sudo pacman -S --noconfirm vim neovim
-  git clone https://github.com/NvChad/starter ~/.config/nvim
 
 	# Fonts
 	sudo pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code ttf-firacode-nerd ttf-iosevka-nerd ttf-liberation ttf-font-awesome
@@ -49,24 +44,25 @@ install: folder yay
 
 	# File manager
 	sudo pacman -S --noconfirm thunar thunar-volman thunar-archive-plugin
-
-docker:
-	sudo pacman -S --noconfirm docker docker-compose docker-buildx
-	sudo usermod -aG docker $(USER)
-
-go:
-	sudo pacman -S --noconfirm go
-
-node:
-	yay -S --noconfirm fnm-bin
-	fnm install $(NODE_VERSION)
-
 sshkey:
 	ssh-keygen -t rsa -C "$(USER)"
 	eval "$$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa
 	bat ~/.ssh/id_rsa.pub
 	xclip -sel clip < ~/.ssh/id_rsa.pub
-
+docker:
+	sudo pacman -S --noconfirm docker docker-compose docker-buildx
+	sudo usermod -aG docker $(USER)
+go:
+	sudo pacman -S --noconfirm go
+node:
+	yay -S --noconfirm fnm-bin
+	fnm install $(NODE_VERSION)
 virtualbox:
 	sudo pacman -S --noconfirm virtualbox virtualbox-guest-utils
 	sudo modprobe vboxdrv
+colorscripts:
+	yay -S --noconfirm shell-color-scripts
+	colorscript -b hex
+vim:
+	sudo pacman -S --noconfirm vim neovim
+	git clone https://github.com/NvChad/starter ~/.config/nvim
