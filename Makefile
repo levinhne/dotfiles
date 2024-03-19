@@ -6,10 +6,12 @@ folder:
 	sudo sed -i 's/#ParallelDownload/ParallelDownload/g' /etc/pacman.conf
 
 yay:
+ifeq ($(shell yay --version 2>/dev/null),)
 	rm -rf ~/Downloads/yay-bin/
 	git clone https://aur.archlinux.org/yay-bin.git ~/Downloads/yay-bin
 	cd ~/Downloads/yay-bin/ && makepkg -si
 	rm -rf yay-bin
+endif
 
 install:
 	# Linux headers
@@ -60,9 +62,11 @@ node:
 virtualbox:
 	sudo pacman -S --noconfirm virtualbox virtualbox-guest-utils
 	sudo modprobe vboxdrv
-colorscripts:
+colorscript:
 	yay -S --noconfirm shell-color-scripts
 	colorscript -b hex
 vim:
+	rm -rf ~/.config/nvim
+	rm -rf ~/.local/share/nvim
 	sudo pacman -S --noconfirm vim neovim
 	git clone https://github.com/NvChad/starter ~/.config/nvim
