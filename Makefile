@@ -69,4 +69,3 @@ vim:
 	rm -rf ~/.config/nvim
 	rm -rf ~/.local/share/nvim
 	sudo pacman -S --noconfirm vim neovim
-	git clone https://github.com/NvChad/starter ~/.config/nvim
