@@ -46,14 +46,23 @@ keys = [
     Key([mod], "Tab", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key(
+        [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
+    ),
+    Key(
+        [mod, "shift"],
+        "l",
+        lazy.layout.shuffle_right(),
+        desc="Move window to the right",
+    ),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key(
+        [mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"
+    ),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
@@ -77,16 +86,29 @@ keys = [
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window",
     ),
-    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
+    Key(
+        [mod],
+        "t",
+        lazy.window.toggle_floating(),
+        desc="Toggle floating on the focused window",
+    ),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key(["mod1"], "F1",  lazy.spawn("rofi -show drun -theme ~/.config/rofi/style1.rasi"), desc="Rofi show drun"),
-
+    Key(
+        ["mod1"],
+        "F1",
+        lazy.spawn("rofi -show drun -theme ~/.config/rofi/style1.rasi"),
+        desc="Rofi show drun",
+    ),
     Key([mod], "b", lazy.spawn("brave"), desc="Launch brave"),
-    KeyChord([mod],"s", [
-        Key([], "s", lazy.spawn("flameshot gui -s -c"), desc="Take a screenshot"),
-    ]),
+    KeyChord(
+        [mod],
+        "s",
+        [
+            Key([], "s", lazy.spawn("flameshot gui -s -c"), desc="Take a screenshot"),
+        ],
+    ),
     Key(["control", "shift"], "l", lazy.spawn("betterlockscreen -l dim"), desc=""),
     Key(
         [],
@@ -107,10 +129,19 @@ group_names = ["1", "2", "3", "4", "5", "6", "7", "8"]
 group_labels = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"]
 # group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "GFX",]
 # group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
-#group_labels = ["", "", "", "", "", "", "", "", "",]
+# group_labels = ["", "", "", "", "", "", "", "", "",]
 
 
-group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
+group_layouts = [
+    "monadtall",
+    "monadtall",
+    "monadtall",
+    "monadtall",
+    "monadtall",
+    "monadtall",
+    "monadtall",
+    "monadtall",
+]
 
 for i in range(len(group_names)):
     groups.append(
@@ -118,7 +149,8 @@ for i in range(len(group_names)):
             name=group_names[i],
             layout=group_layouts[i].lower(),
             label=group_labels[i],
-        ))
+        )
+    )
 
 for i in groups:
     keys.extend(
@@ -142,18 +174,13 @@ for i in groups:
 
 layouts = [
     # layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(
-        margin=5
-    ),
+    layout.Max(margin=5),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
     layout.MonadTall(
-        margin=5,
-        border_focus="#293342",
-        border_normal="#222a36",
-        single_border_width=0
+        margin=5, border_focus="#293342", border_normal="#222a36", single_border_width=0
     ),
     # layout.MonadWide(),
     # layout.RatioTile(),
@@ -181,111 +208,75 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.Spacer(
-                    length=5
-                ),
-                widget.CurrentLayoutIcon(
-                    scale=0.5
-                ),
-                widget.CurrentLayout(
-                    fontsize=13
-                ),
-                widget.Spacer(
-                    length=5
-                ),
+                widget.Spacer(length=5),
+                widget.CurrentLayoutIcon(scale=0.5),
+                widget.CurrentLayout(fontsize=13),
+                widget.Spacer(length=5),
                 widget.GroupBox(
                     font="Iosevka Nerd Font",
-                    inactive = "#a7a7a7",
-                    disable_drag = True,
+                    inactive="#a7a7a7",
+                    disable_drag=True,
                     # margin_x = 6,
                     highlight_method="block",
-                    fontsize = 16,
+                    fontsize=16,
                 ),
-                widget.Spacer(
-                    length=5
-                ),
-                widget.Prompt(
-                ),
-                widget.Spacer(
-                    length=5
-                ),
+                widget.Spacer(length=5),
+                widget.Prompt(),
+                widget.Spacer(length=5),
                 widget.WindowName(
                     max_chars=50,
                 ),
-                 widget.TextBox(
-                    text="",
-                    fontsize=15,
-                    foreground = "#bf616a"
-                ),
+                widget.TextBox(text="", fontsize=15, foreground="#bf616a"),
                 widget.Volume(
-                    font="Iosevka Nerd Font Light",
-                    limit_max_volume = True,
-                    fmt = "{}"
+                    font="Iosevka Nerd Font Light", limit_max_volume=True, fmt="{}"
                 ),
-                widget.Spacer(
-                    length=10
-                ),
-                widget.TextBox(
-                    text=" ",
-                    fontsize=15,
-                    foreground = "#88c0d0"
-                ),
+                widget.Spacer(length=10),
+                widget.TextBox(text=" ", fontsize=15, foreground="#88c0d0"),
                 widget.Net(
                     font="Iosevka Nerd Font Light",
-                    format='{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}'
+                    format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
                 ),
-                 widget.Spacer(
-                    length=15
-                ),
+                widget.Spacer(length=15),
                 widget.TextBox(
                     text=" ",
                     fontsize=15,
-                    foreground = "#7797b7",
+                    foreground="#7797b7",
                 ),
                 widget.CPU(
                     font="Iosevka Nerd Font Light",
-                    format='{freq_current}GHz {load_percent}%',
+                    format="{freq_current}GHz {load_percent}%",
                 ),
-                widget.Spacer(
-                    length=15
-                ),
-                 widget.TextBox(
+                widget.Spacer(length=15),
+                widget.TextBox(
                     text=" ",
                     fontsize=15,
-                    foreground = "#7797b7",
+                    foreground="#7797b7",
                 ),
                 widget.Memory(
                     font="Iosevka Nerd Font Light",
                     format="{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}",
-                    measure_mem = "G"
+                    measure_mem="G",
                 ),
-                widget.Spacer(
-                    length=15
-                ),
-                widget.TextBox(
-                    text=" ",
-                    fontsize=15,
-                    foreground = "#bf616a"
-                ),
-                widget.Clock(
-                    format="%Y-%m-%d %I:%M %p"
-                ),
-                widget.Spacer(
-                    length=10
-                ),
+                widget.Spacer(length=15),
+                widget.TextBox(text=" ", fontsize=15, foreground="#bf616a"),
+                widget.Clock(format="%Y-%m-%d %I:%M %p"),
+                widget.Spacer(length=10),
                 widget.QuickExit(
                     fontsize=13,
                     default_text="[X]",
                     countdown_format="[{}]",
                 ),
-                widget.Spacer(
-                    length=5
-                ),
+                widget.Spacer(length=5),
             ],
             30,
             background="#2a313b",
             border_width=[1, 0, 1, 0],  # Draw top and bottom borders
-            border_color=["#2a313b", "#2a313b", "#2a313b", "#2a313b"]  # Borders are magenta
+            border_color=[
+                "#2a313b",
+                "#2a313b",
+                "#2a313b",
+                "#2a313b",
+            ],  # Borders are magenta
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
@@ -296,8 +287,15 @@ screens = [
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag(
+        [mod],
+        "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
@@ -308,7 +306,7 @@ bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
-    border_width = 0,
+    border_width=0,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -318,7 +316,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
-    ]
+    ],
 )
 auto_fullscreen = True
 focus_on_window_activation = "smart"
@@ -331,10 +329,12 @@ auto_minimize = True
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
 
+
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/autostart.sh'])
+    home = os.path.expanduser("~")
+    subprocess.call([home + "/.config/qtile/autostart.sh"])
+
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
