@@ -13,7 +13,7 @@ ifeq ($(shell yay --version 2>/dev/null),)
 	rm -rf yay-bin
 endif
 
-install:
+install: folder yay
 	# Linux headers
 	sudo pacman -S --noconfirm linux-headers
 
@@ -24,7 +24,7 @@ install:
 	sudo pacman -S --noconfirm qtile python-psutil python-dbus-next
 
 	# Terminal
-	sudo pacman -S --noconfirm kitty tmux fish starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit
+	sudo pacman -S --noconfirm kitty tmux fish starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit fzf
 
 	# Fonts
 	sudo pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code ttf-firacode-nerd ttf-iosevka-nerd ttf-liberation ttf-font-awesome
