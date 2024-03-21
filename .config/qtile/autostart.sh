@@ -20,5 +20,5 @@ ksuperkey -e 'Super_L=Alt_L|F1' &
 ksuperkey -e 'Super_R=Alt_L|F1' &
 
 picom --daemon &
-feh --bg-fill ~/Pictures/Wallpapers/
+feh --bg-fill ~/.wallpapers/
 
