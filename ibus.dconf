@@ -1,0 +1,10 @@
+[general]
+embed-preedit-text=false
+preload-engines=['BambooUs', 'Bamboo']
+version='1.5.29'
+
+[general/hotkey]
+triggers=['<Shift>space']
+
+[panel]
+show-icon-on-systray=false
