@@ -221,6 +221,7 @@ screens = [
                     fontsize=16,
                 ),
                 widget.Spacer(length=5),
+                widget.Prompt(),
                 widget.Spacer(length=5),
                 widget.WindowName(
                     max_chars=50,
@@ -259,13 +260,12 @@ screens = [
                 widget.Spacer(length=15),
                 widget.TextBox(text=" ", fontsize=15, foreground="#bf616a"),
                 widget.Clock(format="%Y-%m-%d %I:%M %p"),
-                widget.Spacer(length=10),
-                widget.Prompt(),
-                widget.QuickExit(
-                    fontsize=13,
-                    default_text="[X]",
-                    countdown_format="[{}]",
-                ),
+                # widget.Spacer(length=10),
+                # widget.QuickExit(
+                #     fontsize=13,
+                #     default_text="[X]",
+                #     countdown_format="[{}]",
+                # ),
                 widget.Spacer(length=5),
             ],
             30,
