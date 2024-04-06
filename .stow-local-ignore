@@ -1,6 +1,7 @@
 # Comments and blank lines are allowed.
 
 Makefile
+ibus.dconf
 
 RCS
 .+,v
