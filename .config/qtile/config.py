@@ -236,7 +236,7 @@ screens = [
                     font="Iosevka Nerd Font Light",
                     format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
                 ),
-                widget.Spacer(length=15),
+                widget.Spacer(length=10),
                 widget.TextBox(
                     text=" ",
                     fontsize=15,
@@ -246,7 +246,7 @@ screens = [
                     font="Iosevka Nerd Font Light",
                     format="{freq_current}GHz {load_percent}%",
                 ),
-                widget.Spacer(length=15),
+                widget.Spacer(length=10),
                 widget.TextBox(
                     text=" ",
                     fontsize=15,
@@ -257,7 +257,7 @@ screens = [
                     format="{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}",
                     measure_mem="G",
                 ),
-                widget.Spacer(length=15),
+                widget.Spacer(length=10),
                 widget.TextBox(text=" ", fontsize=15, foreground="#bf616a"),
                 widget.Clock(format="%Y-%m-%d %I:%M %p"),
                 # widget.Spacer(length=10),
