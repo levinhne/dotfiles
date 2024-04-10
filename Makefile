@@ -68,4 +68,7 @@ colorscript:
 vim:
 	rm -rf ~/.config/nvim
 	rm -rf ~/.local/share/nvim
-	sudo pacman -S --noconfirm vim neovim
+	sudo pacman -S --noconfirm vi vim neovim
+ibus-bamboo:
+	yay -S --noconfirm ibus-bamboo
+	dconf load /desktop/ibus/ < ibus.dconf
