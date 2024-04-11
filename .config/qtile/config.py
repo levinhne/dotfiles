@@ -209,9 +209,12 @@ screens = [
         top=bar.Bar(
             [
                 widget.Spacer(length=5),
-                widget.CurrentLayoutIcon(scale=0.5),
-                widget.CurrentLayout(fontsize=13),
-                widget.Spacer(length=5),
+                widget.Image(
+                    filename="~/.config/qtile/archlinux.svg",
+                    margin=5,
+                ),
+                # widget.CurrentLayout(fontsize=13),
+                # widget.Spacer(length=5),
                 widget.GroupBox(
                     font="Iosevka Nerd Font",
                     inactive="#a7a7a7",
@@ -266,6 +269,8 @@ screens = [
                 #     default_text="[X]",
                 #     countdown_format="[{}]",
                 # ),
+                widget.Spacer(length=5),
+                widget.CurrentLayoutIcon(scale=0.5),
                 widget.Spacer(length=5),
             ],
             30,
