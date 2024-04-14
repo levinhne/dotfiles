@@ -46,6 +46,8 @@ install: folder yay
 
 	# File manager
 	sudo pacman -S --noconfirm thunar thunar-volman thunar-archive-plugin
+
+	stow .
 sshkey:
 	ssh-keygen -t rsa -C "$(USER)"
 	eval "$$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa

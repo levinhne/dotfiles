@@ -31,6 +31,7 @@ from libqtile import bar, extension, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal, send_notification
+from custom.widgets import MouseOverClock
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -133,14 +134,14 @@ group_labels = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"]
 
 
 group_layouts = [
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
+    "max",
+    "max",
+    "max",
+    "max",
+    "max",
+    "max",
+    "max",
+    "max",
 ]
 
 for i in range(len(group_names)):
@@ -209,12 +210,13 @@ screens = [
         top=bar.Bar(
             [
                 widget.Spacer(length=5),
-                widget.Image(
-                    filename="~/.config/qtile/archlinux.svg",
-                    margin=5,
-                ),
-                # widget.CurrentLayout(fontsize=13),
-                # widget.Spacer(length=5),
+                # widget.Image(
+                #     filename="~/.config/qtile/archlinux.svg",
+                #     margin=6,
+                # ),
+                widget.CurrentLayoutIcon(scale=0.5),
+                widget.CurrentLayout(fontsize=13),
+                widget.Spacer(length=5),
                 widget.GroupBox(
                     font="Iosevka Nerd Font",
                     inactive="#a7a7a7",
@@ -229,12 +231,20 @@ screens = [
                 widget.WindowName(
                     max_chars=50,
                 ),
-                widget.TextBox(text="", fontsize=15, foreground="#bf616a"),
+                widget.TextBox(
+                    text="",
+                    fontsize=15,
+                    foreground="#bf616a",
+                ),
                 widget.Volume(
                     font="Iosevka Nerd Font Light", limit_max_volume=True, fmt="{}"
                 ),
                 widget.Spacer(length=10),
-                widget.TextBox(text=" ", fontsize=15, foreground="#88c0d0"),
+                widget.TextBox(
+                    text=" ",
+                    fontsize=16,
+                    foreground="#88c0d0",
+                ),
                 widget.Net(
                     font="Iosevka Nerd Font Light",
                     format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
@@ -258,19 +268,23 @@ screens = [
                 widget.Memory(
                     font="Iosevka Nerd Font Light",
                     format="{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}",
-                    measure_mem="G",
                 ),
                 widget.Spacer(length=10),
-                widget.TextBox(text=" ", fontsize=15, foreground="#bf616a"),
-                widget.Clock(format="%Y-%m-%d %I:%M %p"),
-                # widget.Spacer(length=10),
-                # widget.QuickExit(
-                #     fontsize=13,
-                #     default_text="[X]",
-                #     countdown_format="[{}]",
-                # ),
-                widget.Spacer(length=5),
-                widget.CurrentLayoutIcon(scale=0.5),
+                widget.TextBox(
+                    text=" ",
+                    fontsize=15,
+                    foreground="#bf616a",
+                ),
+                MouseOverClock(
+                    format="%I:%M %p",
+                    long_format="%Y-%m-%d %I:%M %p",
+                ),
+                widget.Spacer(length=8),
+                widget.QuickExit(
+                    fontsize=13,
+                    default_text="[X]",
+                    countdown_format="[{}]",
+                ),
                 widget.Spacer(length=5),
             ],
             30,
