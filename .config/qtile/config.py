@@ -234,10 +234,12 @@ screens = [
                 widget.TextBox(
                     text="",
                     fontsize=15,
-                    foreground="#bf616a",
+                    foreground="#88c0d0",
                 ),
                 widget.Volume(
-                    font="Iosevka Nerd Font Light", limit_max_volume=True, fmt="{}"
+                    font="Iosevka Nerd Font Light",
+                    limit_max_volume=True,
+                    fmt="{}",
                 ),
                 widget.Spacer(length=10),
                 widget.TextBox(
@@ -273,7 +275,7 @@ screens = [
                 widget.TextBox(
                     text=" ",
                     fontsize=15,
-                    foreground="#bf616a",
+                    foreground="#7797b7",
                 ),
                 MouseOverClock(
                     format="%I:%M %p",
@@ -281,8 +283,9 @@ screens = [
                 ),
                 widget.Spacer(length=8),
                 widget.QuickExit(
-                    fontsize=13,
-                    default_text="[X]",
+                    fontsize=15,
+                    default_text=" ",
+                    foreground="#bf616a",
                     countdown_format="[{}]",
                 ),
                 widget.Spacer(length=5),
