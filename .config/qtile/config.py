@@ -275,7 +275,7 @@ screens = [
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text=" ",
-                    fontsize=15,
+                    fontsize=14,
                     foreground="#7797b7",
                 ),
                 MouseOverClock(
