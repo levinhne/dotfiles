@@ -189,11 +189,11 @@ layouts = [
     #     margin=5,
     #     border_width=0,
     # ),
-    # layout.TreeTab(
-    #     font = "Iosevka Nerd Font SemiBold",
-    #     fontsize = 13,
-    #     padding_y = 4,
-    # ),
+    layout.TreeTab(
+        font="Iosevka Nerd Font SemiBold",
+        fontsize=13,
+        padding_y=4,
+    ),
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
@@ -236,6 +236,7 @@ screens = [
                     fontsize=15,
                     foreground="#88c0d0",
                 ),
+                widget.Spacer(length=2),
                 widget.Volume(
                     font="Iosevka Nerd Font Light",
                     limit_max_volume=True,
@@ -244,7 +245,7 @@ screens = [
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text=" ",
-                    fontsize=16,
+                    fontsize=15,
                     foreground="#88c0d0",
                 ),
                 widget.Net(
@@ -263,7 +264,7 @@ screens = [
                 ),
                 widget.Spacer(length=10),
                 widget.TextBox(
-                    text=" ",
+                    text=" ",
                     fontsize=15,
                     foreground="#7797b7",
                 ),
@@ -281,13 +282,13 @@ screens = [
                     format="%I:%M %p",
                     long_format="%Y-%m-%d %I:%M %p",
                 ),
-                widget.Spacer(length=8),
-                widget.QuickExit(
-                    fontsize=15,
-                    default_text=" ",
-                    foreground="#bf616a",
-                    countdown_format="[{}]",
-                ),
+                # widget.Spacer(length=8),
+                # widget.QuickExit(
+                #     fontsize=14,
+                #     default_text=" ",
+                #     foreground="#bf616a",
+                #     countdown_format="[{}]",
+                # ),
                 widget.Spacer(length=5),
             ],
             30,
