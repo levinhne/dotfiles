@@ -180,6 +180,7 @@
     "VirtualBox:VirtualBox": 7,
     "brave-browser:Brave-browser": 6,
     "brave:Brave": 7,
+    "mongodb compass:MongoDB Compass": 7,
     "vivaldi-stable:Vivaldi-stable": 7
   }
 }
