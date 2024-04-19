@@ -244,7 +244,7 @@ screens = [
                 ),
                 widget.Spacer(length=10),
                 widget.TextBox(
-                    text=" ",
+                    text="󰤨 ",
                     fontsize=15,
                     foreground="#88c0d0",
                 ),
@@ -254,7 +254,7 @@ screens = [
                 ),
                 widget.Spacer(length=10),
                 widget.TextBox(
-                    text=" ",
+                    text=" ",
                     fontsize=15,
                     foreground="#7797b7",
                 ),
@@ -264,7 +264,7 @@ screens = [
                 ),
                 widget.Spacer(length=10),
                 widget.TextBox(
-                    text=" ",
+                    text=" ",
                     fontsize=15,
                     foreground="#7797b7",
                 ),
@@ -274,7 +274,7 @@ screens = [
                 ),
                 widget.Spacer(length=10),
                 widget.TextBox(
-                    text=" ",
+                    text=" ",
                     fontsize=15,
                     foreground="#7797b7",
                 ),
