@@ -47,7 +47,8 @@ install: folder yay
 	# File manager
 	sudo pacman -S --noconfirm thunar thunar-volman thunar-archive-plugin
 
-	stow .
+	rm -rf ~/.bashrc
+	stow --adopt .
 sshkey:
 	ssh-keygen -t rsa -C "$(USER)"
 	eval "$$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa
@@ -64,9 +65,9 @@ node:
 virtualbox:
 	sudo pacman -S --noconfirm virtualbox virtualbox-guest-utils
 	sudo modprobe vboxdrv
-colorscript:
-	yay -S --noconfirm shell-color-scripts
-	colorscript -b hex
+# colorscript:
+# 	yay -S --noconfirm shell-color-scripts
+# 	colorscript -b hex
 vim:
 	rm -rf ~/.config/nvim
 	rm -rf ~/.local/share/nvim
