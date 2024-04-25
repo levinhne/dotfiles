@@ -54,8 +54,8 @@ sshkey:
 	eval "$$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa
 	bat ~/.ssh/id_rsa.pub
 	xclip -sel clip < ~/.ssh/id_rsa.pub
-docker:
-	sudo pacman -S --noconfirm docker docker-compose docker-buildx
+devops:
+	sudo pacman -S --noconfirm docker docker-compose docker-buildx minikube helm kubectl k9s
 	sudo usermod -aG docker $(USER)
 go:
 	sudo pacman -S --noconfirm go
