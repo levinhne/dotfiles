@@ -1,0 +1,118 @@
+# -----------------------------------------------------------------------------
+# Github dark dimmed skin
+# -----------------------------------------------------------------------------
+
+# Styles...
+foreground: &foreground "#dadee8"
+background: &background "#1e222a"
+black: &black "#545d68"
+cyan: &cyan "#39c5cf"
+green: &green "#A3BE8C"
+orange: &orange "#D08770"
+blue: &blue "#539bf5"
+magenta: &magenta "#b083f0"
+red: &red "#f47067"
+yellow: &yellow "#c69026"
+
+# Skin...
+k9s:
+  # General K9s styles
+  body:
+    fgColor: *foreground
+    bgColor: default
+    logoColor: *magenta
+  # Command prompt styles
+  prompt:
+    fgColor: *foreground
+    bgColor: *background
+    suggestColor: *orange
+  # ClusterInfoView styles.
+  info:
+    fgColor: *blue
+    sectionColor: *foreground
+  # Dialog styles.
+  dialog:
+    fgColor: *foreground
+    bgColor: default
+    buttonFgColor: *foreground
+    buttonBgColor: *magenta
+    buttonFocusFgColor: *foreground
+    buttonFocusBgColor: *blue
+    labelFgColor: *orange
+    fieldFgColor: *foreground
+  frame:
+    # Borders styles.
+    border:
+      fgColor: *black
+      focusColor: *black
+    menu:
+      fgColor: *foreground
+      keyColor: *blue
+      # Used for favorite namespaces
+      numKeyColor: *blue
+    # CrumbView attributes for history navigation.
+    crumbs:
+      fgColor: *foreground
+      bgColor: *black
+      activeColor: *black
+    # Resource status and update styles
+    status:
+      newColor: *blue
+      modifyColor: *magenta
+      addColor: *green
+      errorColor: *red
+      highlightColor: *orange
+      killColor: *black
+      completedColor: *black
+    # Border title styles.
+    title:
+      fgColor: *foreground
+      bgColor: *black
+      highlightColor: *orange
+      counterColor: *magenta
+      filterColor: *black
+  views:
+    # Charts skins...
+    charts:
+      bgColor: default
+      defaultDialColors:
+        - *magenta
+        - *red
+      defaultChartColors:
+        - *magenta
+        - *red
+    # TableView attributes.
+    table:
+      fgColor: *foreground
+      bgColor: default
+      # Header row styles.
+      header:
+        fgColor: *foreground
+        bgColor: default
+        sorterColor: *cyan
+    # Xray view attributes.
+    xray:
+      fgColor: *foreground
+      bgColor: default
+      cursorColor: *black
+      graphicColor: *magenta
+      showIcons: false
+    # YAML info styles.
+    yaml:
+      keyColor: *blue
+      colonColor: *magenta
+      valueColor: *foreground
+    # Logs styles.
+    logs:
+      fgColor: *foreground
+      bgColor: default
+      indicator:
+        fgColor: *foreground
+        bgColor: *black
+        toggleOnColor: *magenta
+        toggleOffColor: *blue
+    help:
+      fgColor: *foreground
+      bgColor: *background
+      indicator:
+        fgColor: *red
