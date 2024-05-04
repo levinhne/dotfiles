@@ -1,5 +1,7 @@
 NODE_VERSION ?= --lts
 
+.PHONY: install
+
 folder:
 	cd ~ && mkdir -p {Desktop,Develop,Documents,Downloads,Pictures,Pictures/Wallpapers,Videos}
 	sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
@@ -14,9 +16,6 @@ ifeq ($(shell yay --version 2>/dev/null),)
 endif
 
 install: folder yay
-	# Linux headers
-	sudo pacman -S --noconfirm linux-headers
-
 	# Xorg
 	sudo pacman -S --noconfirm xorg xorg-server xcolor
 
@@ -63,11 +62,8 @@ node:
 	yay -S --noconfirm fnm-bin
 	fnm install $(NODE_VERSION)
 virtualbox:
-	sudo pacman -S --noconfirm virtualbox virtualbox-guest-utils
+	sudo pacman -S --noconfirm linux-headers virtualbox virtualbox-guest-utils
 	sudo modprobe vboxdrv
-# colorscript:
-# 	yay -S --noconfirm shell-color-scripts
-# 	colorscript -b hex
 vim:
 	rm -rf ~/.config/nvim
 	rm -rf ~/.local/share/nvim
