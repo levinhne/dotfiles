@@ -106,10 +106,12 @@ keys = [
         "r",
         lazy.run_extension(
             extension.DmenuRun(
-                dmenu_command="dmenu_run -c -l 10",
+                dmenu_command="dmenu_run -c -l 10 -shf '#dddddd'",
                 dmenu_prompt=" ",
                 dmenu_font="Iosevka Nerd Font:size=10",
                 dmenu_height=30,
+                background="#2a313b",
+                selected_background="#215578",
             )
         ),
         # lazy.spawn('dmenu_run -c -l 20 -h 32 -fn "Iosevka Nerd Font:size=11" -p " "'),
