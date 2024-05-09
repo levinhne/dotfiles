@@ -10,7 +10,7 @@ for _prs in "${_ps[@]}"; do
 	fi
 done
 
-dunst -conf ~/.config/dunst/dunst.conf &
+dunst &
 
 # Fix cursor
 xsetroot -cursor_name left_ptr
