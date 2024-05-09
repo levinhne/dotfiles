@@ -44,7 +44,12 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "Tab", lazy.layout.next(), desc="Move window focus to other window"),
+    Key(
+        [mod],
+        "Tab",
+        lazy.layout.next(),
+        desc="Move window focus to other window",
+    ),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key(
@@ -95,12 +100,19 @@ keys = [
     ),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    # custom keys
     Key(
-        ["mod1"],
-        "F1",
-        lazy.spawn("rofi -show drun -theme ~/.config/rofi/style1.rasi"),
-        desc="Rofi show drun",
+        [mod],
+        "r",
+        lazy.run_extension(
+            extension.DmenuRun(
+                dmenu_command="dmenu_run -c -l 20",
+                dmenu_prompt=" ",
+                dmenu_font="Iosevka Nerd Font:size=10",
+                dmenu_height=32,
+            )
+        ),
+        # lazy.spawn('dmenu_run -c -l 20 -h 32 -fn "Iosevka Nerd Font:size=11" -p " "'),
     ),
     Key([mod], "b", lazy.spawn("brave"), desc="Launch brave"),
     KeyChord(
@@ -110,7 +122,25 @@ keys = [
             Key([], "s", lazy.spawn("flameshot gui -s -c"), desc="Take a screenshot"),
         ],
     ),
-    Key(["control", "shift"], "l", lazy.spawn("betterlockscreen -l dim"), desc=""),
+    Key(
+        [
+            mod,
+            "shift",
+        ],
+        "x",
+        lazy.run_extension(
+            extension.CommandSet(
+                dmenu_command="dmenu -c -l 20",
+                dmenu_prompt=" ",
+                dmenu_font="Iosevka Nerd Font:size=10",
+                dmenu_height=32,
+                commands={
+                    "Lock screen": "betterlockscreen -l dim",
+                },
+            )
+        ),
+        desc="",
+    ),
     Key(
         [],
         "XF86AudioRaiseVolume",
@@ -283,6 +313,20 @@ screens = [
                     long_format="%Y-%m-%d %I:%M %p",
                 ),
                 # widget.Spacer(length=8),
+                # widget.TextBox(
+                #     text="[X]",
+                #     fontsize=15,
+                #     foreground="#7797b7",
+                #     mouse_callbacks={
+                #         "Button1": lazy.run_extension(
+                #             extension.CommandSet(
+                #                 commands={
+                #                     "Oh": "1",
+                #                 },
+                #             )
+                #         )
+                #     },
+                # ),
                 # widget.QuickExit(
                 #     fontsize=14,
                 #     default_text=" ",

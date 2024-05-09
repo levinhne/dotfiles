@@ -35,7 +35,7 @@ install: folder yay
 	sudo pacman -S --noconfirm bluez bluez-utils blueman
 
 	# Utilities
-	sudo pacman -S --noconfirm picom lxappearance ly rofi maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils
+	sudo pacman -S --noconfirm picom lxappearance ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils
 	yay -S --noconfirm betterlockscreen ksuperkey
 	sudo systemctl enable ly # enable ly service
 

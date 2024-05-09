@@ -1,0 +1,39 @@
+server_endpoint = "/run/user/1000/clipcat/grpc.sock"
+finder = "dmenu"
+preview_length = 80
+
+[rofi]
+line_length = 100
+menu_length = 30
+menu_prompt = "Clipcat"
+extra_arguments = []
+
+[dmenu]
+line_length = 100
+menu_length = 30
+menu_prompt = "󱘞 "
+extra_arguments = [
+  "-c",
+  "-l",
+  "20",
+  "-h",
+  "32",
+  "-fn",
+  "Iosevka Nerd Font-11"
+]
+
+[choose]
+line_length = 100
+menu_length = 30
+menu_prompt = "Clipcat"
+extra_arguments = []
+
+[custom_finder]
+program = "fzf"
+args = []
+
+[log]
+emit_journald = true
+emit_stdout = false
+emit_stderr = false
+level = "INFO"
