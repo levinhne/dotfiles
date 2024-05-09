@@ -22,3 +22,4 @@ ksuperkey -e 'Super_R=Alt_L|F1' &
 picom --daemon &
 feh --bg-fill ~/.wallpapers/
 
+clipcatd

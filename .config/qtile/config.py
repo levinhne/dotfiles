@@ -106,10 +106,10 @@ keys = [
         "r",
         lazy.run_extension(
             extension.DmenuRun(
-                dmenu_command="dmenu_run -c -l 20",
+                dmenu_command="dmenu_run -c -l 10",
                 dmenu_prompt=" ",
                 dmenu_font="Iosevka Nerd Font:size=10",
-                dmenu_height=32,
+                dmenu_height=30,
             )
         ),
         # lazy.spawn('dmenu_run -c -l 20 -h 32 -fn "Iosevka Nerd Font:size=11" -p " "'),
@@ -133,7 +133,7 @@ keys = [
                 dmenu_command="dmenu -c -l 20",
                 dmenu_prompt=" ",
                 dmenu_font="Iosevka Nerd Font:size=10",
-                dmenu_height=32,
+                dmenu_height=30,
                 commands={
                     "Lock screen": "betterlockscreen -l dim",
                 },

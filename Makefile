@@ -71,3 +71,7 @@ vim:
 ibus-bamboo:
 	yay -S --noconfirm ibus-bamboo
 	dconf load /desktop/ibus/ < ibus.dconf
+dmenu:
+	rm -rf ~/Downloads/dmenu-distrotube
+	git clone https://gitlab.com/dwt1/dmenu-distrotube.git ~/Downloads/dmenu-distrotube
+	cd ~/Downloads/dmenu-distrotube/ && sudo make clean install && rm -rf config.h
