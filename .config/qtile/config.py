@@ -32,7 +32,9 @@ from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal, send_notification
 from custom.widgets import MouseOverClock
+import colors
 
+colors = colors.Dracula
 mod = "mod4"
 terminal = guess_terminal()
 
@@ -205,16 +207,20 @@ for i in groups:
         ]
     )
 
+layout_theme = {
+    "margin": 5,
+    "border_focus": colors[8],
+    "border_normal": colors[0],
+}
+
 layouts = [
     # layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(margin=5),
+    layout.Max(**layout_theme),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    layout.MonadTall(
-        margin=5, border_focus="#293342", border_normal="#222a36", single_border_width=0
-    ),
+    layout.MonadTall(**layout_theme),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(
@@ -234,6 +240,7 @@ widget_defaults = dict(
     font="Iosevka Nerd Font SemiBold",
     fontsize=14,
     padding=3,
+    background=colors[0],
 )
 extension_defaults = widget_defaults.copy()
 
@@ -246,16 +253,31 @@ screens = [
                 #     filename="~/.config/qtile/archlinux.svg",
                 #     margin=6,
                 # ),
-                widget.CurrentLayoutIcon(scale=0.5),
-                widget.CurrentLayout(fontsize=13),
+                widget.CurrentLayoutIcon(
+                    scale=0.5,
+                    foreground=colors[1],
+                ),
+                widget.CurrentLayout(
+                    foreground=colors[1],
+                ),
                 widget.Spacer(length=5),
                 widget.GroupBox(
+                    margin_y=5,
+                    margin_x=5,
+                    padding_y=0,
+                    padding_x=1,
+                    borderwidth=2,
                     font="Iosevka Nerd Font",
-                    inactive="#a7a7a7",
                     disable_drag=True,
-                    # margin_x = 6,
-                    highlight_method="block",
+                    highlight_method="line",
                     fontsize=16,
+                    active=colors[4],
+                    inactive=colors[1],
+                    highlight_color=colors[2],
+                    this_current_screen_border=colors[7],
+                    this_screen_border=colors[4],
+                    other_current_screen_border=colors[7],
+                    other_screen_border=colors[4],
                 ),
                 widget.Spacer(length=5),
                 widget.Prompt(),
@@ -265,8 +287,7 @@ screens = [
                 ),
                 widget.TextBox(
                     text="",
-                    fontsize=15,
-                    foreground="#88c0d0",
+                    foreground=colors[1],
                 ),
                 widget.Spacer(length=2),
                 widget.Volume(
@@ -277,8 +298,7 @@ screens = [
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text="󰤨 ",
-                    fontsize=15,
-                    foreground="#88c0d0",
+                    foreground=colors[1],
                 ),
                 widget.Net(
                     font="Iosevka Nerd Font Light",
@@ -287,32 +307,32 @@ screens = [
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text=" ",
-                    fontsize=15,
-                    foreground="#7797b7",
+                    foreground=colors[1],
                 ),
                 widget.CPU(
                     font="Iosevka Nerd Font Light",
                     format="{freq_current}GHz {load_percent}%",
+                    foreground=colors[4],
                 ),
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text=" ",
-                    fontsize=15,
-                    foreground="#7797b7",
+                    foreground=colors[1],
                 ),
                 widget.Memory(
                     font="Iosevka Nerd Font Light",
                     format="{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}",
+                    foreground=colors[8],
                 ),
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text=" ",
-                    fontsize=15,
-                    foreground="#7797b7",
+                    foreground=colors[1],
                 ),
                 MouseOverClock(
                     format="%I:%M %p",
                     long_format="%Y-%m-%d %I:%M %p",
+                    foreground=colors[8],
                 ),
                 # widget.Spacer(length=8),
                 # widget.TextBox(
@@ -338,14 +358,14 @@ screens = [
                 widget.Spacer(length=5),
             ],
             30,
-            background="#2a313b",
-            border_width=[1, 0, 1, 0],  # Draw top and bottom borders
-            border_color=[
-                "#2a313b",
-                "#2a313b",
-                "#2a313b",
-                "#2a313b",
-            ],  # Borders are magenta
+            # background="#2a313b",
+            # border_width=[1, 0, 1, 0],  # Draw top and bottom borders
+            # border_color=[
+            #     "#2a313b",
+            #     "#2a313b",
+            #     "#2a313b",
+            #     "#2a313b",
+            # ],  # Borders are magenta
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
@@ -375,7 +395,8 @@ bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
-    border_width=0,
+    border_focus=colors[8],
+    border_width=2,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
