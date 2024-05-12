@@ -102,10 +102,11 @@ keys = [
     ),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # custom keys
     Key(
-        [mod],
-        "r",
+        ["mod1"],
+        "F1",
         lazy.run_extension(
             extension.DmenuRun(
                 dmenu_command="dmenu_run -c -l 10",
@@ -265,7 +266,7 @@ screens = [
                     margin_y=5,
                     margin_x=5,
                     padding_y=0,
-                    padding_x=1,
+                    padding_x=3,
                     borderwidth=2,
                     font="Iosevka Nerd Font",
                     disable_drag=True,
@@ -359,7 +360,7 @@ screens = [
             ],
             30,
             # background="#2a313b",
-            # border_width=[1, 0, 1, 0],  # Draw top and bottom borders
+            # border_width=[0, 0, 0, 0],  # Draw top and bottom borders
             # border_color=[
             #     "#2a313b",
             #     "#2a313b",
@@ -396,7 +397,7 @@ floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
     border_focus=colors[8],
-    border_width=2,
+    border_width=0,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -420,10 +421,10 @@ auto_minimize = True
 wl_input_rules = None
 
 
-@hook.subscribe.startup_once
-def start_once():
-    home = os.path.expanduser("~")
-    subprocess.call([home + "/.config/qtile/autostart.sh"])
+# @hook.subscribe.startup_once
+# def start_once():
+#     home = os.path.expanduser("~")
+#     subprocess.call([home + "/.config/qtile/autostart.sh"])
 
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this

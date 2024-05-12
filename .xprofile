@@ -1,31 +1,37 @@
-export TERM="xterm-256color"
-export vim="nvim"
+#!/bin/sh
+#
+# ~/.xprofile
+#
+#
 
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+xrandr -r 75
 
-export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+# Kill already running process
+_ps=(dunst ksuperkey)
+for _prs in "${_ps[@]}"; do
+	if [[ `pidof ${_prs}` ]]; then
+		killall -9 ${_prs}
+	fi
+done
 
-export EXA_COLORS="\
-uu=36:\
-gu=37:\
-sn=32:\
-sb=32:\
-da=34:\
-ur=34:\
-uw=35:\
-ux=36:\
-ue=36:\
-gr=34:\
-gw=35:\
-gx=36:\
-tr=34:\
-tw=35:\
-tx=36:"
-
-if [ -d "$HOME/.local/bin" ] ;
-  then PATH="$HOME/.local/bin:$PATH"
-fi
+dunst &
 
 
-fish
+# Fix cursor
+xsetroot -cursor_name left_ptr
+
+# Enable Super Keys For Menu
+ksuperkey -e 'Super_L=Alt_L|F1' &
+ksuperkey -e 'Super_R=Alt_L|F1' &
+
+picom --daemon &
+feh --bg-fill ~/.wallpapers/
+
+clipcatd
+
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT4_IM_MODULE=ibus
+export CLUTTER_IM_MODULE=ibus
+ibus-daemon -drx
