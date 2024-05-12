@@ -291,7 +291,7 @@ screens = [
                 ),
                 widget.Spacer(length=2),
                 widget.Volume(
-                    font="Iosevka Nerd Font Light",
+                    font="Iosevka Nerd Font",
                     limit_max_volume=True,
                     fmt="{}",
                 ),
@@ -301,7 +301,7 @@ screens = [
                     foreground=colors[1],
                 ),
                 widget.Net(
-                    font="Iosevka Nerd Font Light",
+                    font="Iosevka Nerd Font",
                     format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
                 ),
                 widget.Spacer(length=10),
@@ -310,7 +310,7 @@ screens = [
                     foreground=colors[1],
                 ),
                 widget.CPU(
-                    font="Iosevka Nerd Font Light",
+                    font="Iosevka Nerd Font",
                     format="{freq_current}GHz {load_percent}%",
                     foreground=colors[4],
                 ),
@@ -320,7 +320,7 @@ screens = [
                     foreground=colors[1],
                 ),
                 widget.Memory(
-                    font="Iosevka Nerd Font Light",
+                    font="Iosevka Nerd Font",
                     format="{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}",
                     foreground=colors[8],
                 ),

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+xrdb merge ~/.Xresources 
+
 xrandr -r 75
 
 # Kill already running process
@@ -11,6 +13,7 @@ for _prs in "${_ps[@]}"; do
 done
 
 dunst &
+
 
 # Fix cursor
 xsetroot -cursor_name left_ptr

@@ -23,7 +23,7 @@ install: folder yay
 	sudo pacman -S --noconfirm qtile python-psutil python-dbus-next
 
 	# Terminal
-	sudo pacman -S --noconfirm kitty tmux fish starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit fzf
+	sudo pacman -S --noconfirm kitty tmux fish fisher starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit fzf
 
 	# Fonts
 	sudo pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code ttf-firacode-nerd ttf-iosevka-nerd ttf-liberation ttf-font-awesome
@@ -32,7 +32,7 @@ install: folder yay
 	sudo pacman -S --noconfirm alsa-utils
 
 	# Bluetooth
-	sudo pacman -S --noconfirm bluez bluez-utils blueman
+	# sudo pacman -S --noconfirm bluez bluez-utils blueman
 
 	# Utilities
 	sudo pacman -S --noconfirm picom lxappearance ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils
@@ -46,7 +46,6 @@ install: folder yay
 	# File manager
 	sudo pacman -S --noconfirm thunar thunar-volman thunar-archive-plugin
 
-	rm -rf ~/.bashrc
 	stow --adopt .
 sshkey:
 	ssh-keygen -t rsa -C "$(USER)"

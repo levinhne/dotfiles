@@ -15,11 +15,11 @@ menu_prompt = "󱘞 "
 extra_arguments = [
   "-c",
   "-l",
-  "10",
+  "20",
   "-h",
-  "30",
+  "32",
   "-fn",
-  "Iosevka Nerd Font-10"
+  "Iosevka Nerd Font-11"
 ]
 
 [choose]
