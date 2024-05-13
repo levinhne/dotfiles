@@ -16,10 +16,6 @@ done
 
 dunst &
 
-
-# Fix cursor
-xsetroot -cursor_name left_ptr
-
 # Enable Super Keys For Menu
 ksuperkey -e 'Super_L=Alt_L|F1' &
 ksuperkey -e 'Super_R=Alt_L|F1' &
@@ -35,3 +31,6 @@ export XMODIFIERS=@im=ibus
 export QT4_IM_MODULE=ibus
 export CLUTTER_IM_MODULE=ibus
 ibus-daemon -drx
+
+# Fix cursor
+sleep 5; xsetroot -cursor_name left_ptr

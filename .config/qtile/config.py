@@ -272,8 +272,8 @@ screens = [
                     disable_drag=True,
                     highlight_method="line",
                     fontsize=16,
-                    active=colors[4],
-                    inactive=colors[1],
+                    active=colors[6],
+                    inactive=colors[2],
                     highlight_color=colors[2],
                     this_current_screen_border=colors[7],
                     this_screen_border=colors[4],
@@ -407,6 +407,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        Match(title="pcmanfm"),  # GPG key password entry
     ],
 )
 auto_fullscreen = True
@@ -421,10 +422,10 @@ auto_minimize = True
 wl_input_rules = None
 
 
-# @hook.subscribe.startup_once
-# def start_once():
-#     home = os.path.expanduser("~")
-#     subprocess.call([home + "/.config/qtile/autostart.sh"])
+@hook.subscribe.startup_once
+def start_once():
+    home = os.path.expanduser("~")
+    subprocess.call([home + "/.config/qtile/autostart.sh"])
 
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
