@@ -111,10 +111,8 @@ keys = [
             extension.DmenuRun(
                 dmenu_command="dmenu_run -c -l 10",
                 dmenu_prompt=" ",
-                dmenu_font="Iosevka Nerd Font:size=10",
+                dmenu_font="Iosevka Nerd Font:size=11",
                 dmenu_height=30,
-                # background="#2a313b",
-                # selected_background="#215578",
             )
         ),
         # lazy.spawn('dmenu_run -c -l 20 -h 32 -fn "Iosevka Nerd Font:size=11" -p " "'),
@@ -273,8 +271,8 @@ screens = [
                     highlight_method="line",
                     fontsize=16,
                     active=colors[6],
-                    inactive=colors[8],
-                    highlight_color=colors[2],
+                    inactive=colors[1],
+                    highlight_color=colors[8],
                     this_current_screen_border=colors[7],
                     this_screen_border=colors[4],
                     other_current_screen_border=colors[7],
@@ -292,7 +290,6 @@ screens = [
                 ),
                 widget.Spacer(length=2),
                 widget.Volume(
-                    font="Iosevka Nerd Font",
                     limit_max_volume=True,
                     fmt="{}",
                 ),
@@ -302,7 +299,6 @@ screens = [
                     foreground=colors[1],
                 ),
                 widget.Net(
-                    font="Iosevka Nerd Font",
                     format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
                 ),
                 widget.Spacer(length=10),
@@ -311,7 +307,6 @@ screens = [
                     foreground=colors[1],
                 ),
                 widget.CPU(
-                    font="Iosevka Nerd Font",
                     format="{freq_current}GHz {load_percent}%",
                     foreground=colors[4],
                 ),
@@ -321,7 +316,6 @@ screens = [
                     foreground=colors[1],
                 ),
                 widget.Memory(
-                    font="Iosevka Nerd Font",
                     format="{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}",
                     foreground=colors[8],
                 ),
