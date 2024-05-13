@@ -15,39 +15,38 @@ ifeq ($(shell yay --version 2>/dev/null),)
 	rm -rf yay-bin
 endif
 
-install: folder yay
-	# Xorg
-	sudo pacman -S --noconfirm xorg xorg-server xcolor
-
-	# Qtile
-	sudo pacman -S --noconfirm qtile python-psutil python-dbus-next
-
-	# Terminal
-	sudo pacman -S --noconfirm kitty tmux fish starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit fzf
-
-	# Fonts
-	sudo pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code ttf-firacode-nerd ttf-iosevka-nerd ttf-liberation ttf-font-awesome
-
-	# Audio
-	sudo pacman -S --noconfirm alsa-utils
-
-	# Bluetooth
-	sudo pacman -S --noconfirm bluez bluez-utils blueman
-
-	# Utilities
-	sudo pacman -S --noconfirm picom lxappearance ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils
-	yay -S --noconfirm betterlockscreen ksuperkey
-	sudo systemctl enable ly # enable ly service
-
-	# Themes
-	sudo pacman -S --noconfirm arc-gtk-theme papirus-icon-theme
-	yay -S --noconfirm qogir-cursor-theme-git
-
-	# File manager
-	sudo pacman -S --noconfirm thunar thunar-volman thunar-archive-plugin
-
-	rm -rf ~/.bashrc
+install: folder yay xorg qtile terminal utilities filemanager dmenu ibus-bamboo themes fonts
 	stow --adopt .
+xorg:
+	sudo pacman -S --noconfirm xorg xorg-server xcolor
+qtile:
+	sudo pacman -S --noconfirm qtile python-psutil python-dbus-next
+terminal:
+	rm -rf ~/.config/nvim
+	rm -rf ~/.local/share/nvim
+	sudo pacman -S --noconfirm vi vim neovim
+	sudo pacman -S --noconfirm kitty tmux fish fisher starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit fzf
+utilities:
+	sudo pacman -S --noconfirm picom lxappearance ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils alsa-utils xdg-utils 
+	yay -S --noconfirm betterlockscreen ksuperkey
+	sudo systemctl enable ly 
+filemanager:
+	sudo pacman -S --noconfirm pcmanfm ranger
+dmenu:
+	rm -rf ~/Downloads/dmenu-distrotube
+	git clone https://gitlab.com/dwt1/dmenu-distrotube.git ~/Downloads/dmenu-distrotube
+	cd ~/Downloads/dmenu-distrotube/ && sudo make clean install && rm -rf config.h
+ibus-bamboo:
+	yay -S --noconfirm ibus-bamboo
+	dconf load /desktop/ibus/ < ibus.dconf
+themes:
+	yay -S --noconfirm dracula-gtk-theme papirus-icon-theme papirus-folders
+	papirus-folders -C indigo --theme Papirus-Dark
+	rm -rf ~/Downloads/Qogir-Cursors-Recolored 
+	git clone https://github.com/TeddyBearKilla/Qogir-Cursors-Recolored --depth=1 ~/Downloads/Qogir-Cursors-Recolored
+	cd ~/Downloads/Qogir-Cursors-Recolored/colors/Dracula/Purple && ./install.sh
+fonts:
+	sudo pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code ttf-firacode-nerd ttf-iosevka-nerd ttf-liberation ttf-font-awesome
 sshkey:
 	ssh-keygen -t rsa -C "$(USER)"
 	eval "$$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa
@@ -64,14 +63,3 @@ node:
 virtualbox:
 	sudo pacman -S --noconfirm linux-headers virtualbox virtualbox-guest-utils
 	sudo modprobe vboxdrv
-vim:
-	rm -rf ~/.config/nvim
-	rm -rf ~/.local/share/nvim
-	sudo pacman -S --noconfirm vi vim neovim
-ibus-bamboo:
-	yay -S --noconfirm ibus-bamboo
-	dconf load /desktop/ibus/ < ibus.dconf
-dmenu:
-	rm -rf ~/Downloads/dmenu-distrotube
-	git clone https://gitlab.com/dwt1/dmenu-distrotube.git ~/Downloads/dmenu-distrotube
-	cd ~/Downloads/dmenu-distrotube/ && sudo make clean install && rm -rf config.h

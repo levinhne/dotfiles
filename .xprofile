@@ -1,4 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/sh
+#
+# ~/.xprofile
+#
+#
 
 xrandr -r 75
 
@@ -12,6 +16,7 @@ done
 
 dunst &
 
+
 # Fix cursor
 xsetroot -cursor_name left_ptr
 
@@ -23,3 +28,10 @@ picom --daemon &
 feh --bg-fill ~/.wallpapers/
 
 clipcatd
+
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT4_IM_MODULE=ibus
+export CLUTTER_IM_MODULE=ibus
+ibus-daemon -drx
