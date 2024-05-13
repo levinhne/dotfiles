@@ -296,7 +296,7 @@ screens = [
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text="󰤨 ",
-                    foreground=colors[1],
+                    foreground=colors[3],
                 ),
                 widget.Net(
                     format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
@@ -304,7 +304,7 @@ screens = [
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text=" ",
-                    foreground=colors[1],
+                    foreground=colors[5],
                 ),
                 widget.CPU(
                     format="{freq_current}GHz {load_percent}%",
@@ -313,21 +313,21 @@ screens = [
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text=" ",
-                    foreground=colors[1],
+                    foreground=colors[6],
                 ),
                 widget.Memory(
                     format="{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}",
-                    foreground=colors[8],
+                    foreground=colors[9],
                 ),
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text=" ",
-                    foreground=colors[1],
+                    foreground=colors[7],
                 ),
                 MouseOverClock(
                     format="%I:%M %p",
                     long_format="%Y-%m-%d %I:%M %p",
-                    foreground=colors[8],
+                    foreground=colors[9],
                 ),
                 # widget.Spacer(length=8),
                 # widget.TextBox(
