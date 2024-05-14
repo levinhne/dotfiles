@@ -208,7 +208,7 @@ for i in groups:
 
 layout_theme = {
     "margin": 5,
-    "border_focus": colors[8],
+    "border_focus": colors[6],
     "border_normal": colors[0],
 }
 
@@ -273,7 +273,7 @@ screens = [
                     active=colors[6],
                     inactive=colors[1],
                     highlight_color=colors[8],
-                    this_current_screen_border=colors[7],
+                    this_current_screen_border=colors[6],
                     this_screen_border=colors[4],
                     other_current_screen_border=colors[7],
                     other_screen_border=colors[4],
@@ -392,8 +392,8 @@ bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
-    border_focus=colors[8],
-    border_width=0,
+    border_focus=colors[6],
+    border_width=2,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
