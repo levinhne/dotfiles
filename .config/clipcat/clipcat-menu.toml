@@ -13,13 +13,13 @@ line_length = 100
 menu_length = 30
 menu_prompt = "󱘞 "
 extra_arguments = [
-  "-c",
+  # "-c",
   "-l",
   "20",
   "-h",
-  "32",
+  "26",
   "-fn",
-  "Iosevka Nerd Font-11"
+  "Iosevka Nerd Font-10"
 ]
 
 [choose]

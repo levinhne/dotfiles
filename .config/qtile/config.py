@@ -109,10 +109,10 @@ keys = [
         "F1",
         lazy.run_extension(
             extension.DmenuRun(
-                dmenu_command="dmenu_run -c -l 10",
+                dmenu_command="dmenu_run -l 10",
                 dmenu_prompt=" ",
-                dmenu_font="Iosevka Nerd Font:size=11",
-                dmenu_height=30,
+                dmenu_font="Iosevka Nerd Font:size=10",
+                dmenu_height=26,
             )
         ),
         # lazy.spawn('dmenu_run -c -l 20 -h 32 -fn "Iosevka Nerd Font:size=11" -p " "'),
@@ -133,10 +133,10 @@ keys = [
         "x",
         lazy.run_extension(
             extension.CommandSet(
-                dmenu_command="dmenu -c -l 20",
+                dmenu_command="dmenu -l 5",
                 dmenu_prompt=" ",
                 dmenu_font="Iosevka Nerd Font:size=10",
-                dmenu_height=30,
+                dmenu_height=26,
                 commands={
                     "Lock screen": "betterlockscreen -l dim",
                 },
@@ -355,14 +355,6 @@ screens = [
                 widget.Spacer(length=5),
             ],
             30,
-            # background="#2a313b",
-            # border_width=[0, 0, 0, 0],  # Draw top and bottom borders
-            # border_color=[
-            #     "#2a313b",
-            #     "#2a313b",
-            #     "#2a313b",
-            #     "#2a313b",
-            # ],  # Borders are magenta
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
