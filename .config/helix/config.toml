@@ -1,0 +1,9 @@
+theme = "dracula"
+
+[keys.normal]
+C-s = ":w"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
