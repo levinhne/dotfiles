@@ -4,6 +4,13 @@
 #
 #
 
+export QT_QPA_PLATFORMTHEME=qt5ct
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT4_IM_MODULE=ibus
+export CLUTTER_IM_MODULE=ibus
+
 xrandr -r 75
 
 # Kill already running process
@@ -25,12 +32,4 @@ feh --bg-fill ~/.wallpapers/
 
 clipcatd
 
-export GTK_IM_MODULE=ibus
-export QT_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT4_IM_MODULE=ibus
-export CLUTTER_IM_MODULE=ibus
 ibus-daemon -drx
-
-# Fix cursor
-sleep 5; xsetroot -cursor_name left_ptr
