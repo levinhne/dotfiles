@@ -35,7 +35,7 @@ from custom.widgets import MouseOverClock
 import colors
 
 # colors
-colors2 = colors.Catppuccin
+colors = colors.Catppuccin
 
 BAR_BACKGROUND_COLOR = "surface0"
 BAR_TEXT_COLOR = "text"
@@ -224,8 +224,8 @@ for i in groups:
 
 layout_theme = {
     "margin": 5,
-    "border_focus": colors2[ACTIVE_BODER_COLOR],
-    "border_normal": colors2[INACTIVE_BORDER_COLOR],
+    "border_focus": colors[ACTIVE_BODER_COLOR],
+    "border_normal": colors[INACTIVE_BORDER_COLOR],
 }
 
 layouts = [
@@ -250,7 +250,7 @@ widget_defaults = dict(
     font="Iosevka Nerd Font SemiBold",
     fontsize=14,
     padding=3,
-    background=colors2[BAR_BACKGROUND_COLOR],
+    background=colors[BAR_BACKGROUND_COLOR],
 )
 extension_defaults = widget_defaults.copy()
 
@@ -265,10 +265,10 @@ screens = [
                 # ),
                 widget.CurrentLayoutIcon(
                     scale=0.5,
-                    foreground=colors2[BAR_TEXT_COLOR],
+                    foreground=colors[BAR_TEXT_COLOR],
                 ),
                 widget.CurrentLayout(
-                    foreground=colors2[BAR_TEXT_COLOR],
+                    foreground=colors[BAR_TEXT_COLOR],
                 ),
                 widget.Spacer(length=5),
                 widget.GroupBox(
@@ -281,17 +281,17 @@ screens = [
                     disable_drag=True,
                     highlight_method="line",
                     fontsize=16,
-                    active=colors2[BAR_GROUP_BOX_ACTIVE_COLOR],
-                    inactive=colors2[BAR_GROUP_BOX_INACTIVE_COLOR],
-                    highlight_color=colors2[BAR_GROUP_BOX_HIGHLIGHT_COLOR],
+                    active=colors[BAR_GROUP_BOX_ACTIVE_COLOR],
+                    inactive=colors[BAR_GROUP_BOX_INACTIVE_COLOR],
+                    highlight_color=colors[BAR_GROUP_BOX_HIGHLIGHT_COLOR],
                     this_current_screen_border=[
-                        colors2[BAR_BACKGROUND_COLOR],
+                        colors[BAR_BACKGROUND_COLOR],
                     ],
                     block_highlight_text_color=[
-                        colors2[BAR_TEXT_COLOR],
-                        colors2[BAR_TEXT_COLOR],
+                        colors[BAR_TEXT_COLOR],
+                        colors[BAR_TEXT_COLOR],
                     ],
-                    # this_screen_border=colors2["red"],
+                    # this_screen_border=colors["red"],
                     # other_current_screen_border=colors[7],
                     # other_screen_border=colors[4],
                 ),
@@ -303,50 +303,50 @@ screens = [
                 ),
                 widget.TextBox(
                     text="",
-                    foreground=colors2[BAR_VOLUME_ICON_COLOR],
+                    foreground=colors[BAR_VOLUME_ICON_COLOR],
                 ),
                 widget.Spacer(length=2),
                 widget.Volume(
                     limit_max_volume=True,
                     fmt="{}",
-                    foreground=colors2[BAR_TEXT_COLOR],
+                    foreground=colors[BAR_TEXT_COLOR],
                 ),
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text="󰤨 ",
-                    foreground=colors2[BAR_WIFI_ICON_COLOR],
+                    foreground=colors[BAR_WIFI_ICON_COLOR],
                 ),
                 widget.Net(
                     format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
-                    foreground=colors2[BAR_TEXT_COLOR],
+                    foreground=colors[BAR_TEXT_COLOR],
                 ),
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text=" ",
-                    foreground=colors2[BAR_CPU_ICON_COLOR],
+                    foreground=colors[BAR_CPU_ICON_COLOR],
                 ),
                 widget.CPU(
                     format="{freq_current}GHz {load_percent}%",
-                    foreground=colors2[BAR_TEXT_COLOR],
+                    foreground=colors[BAR_TEXT_COLOR],
                 ),
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text=" ",
-                    foreground=colors2[BAR_MEM_ICON_COLOR],
+                    foreground=colors[BAR_MEM_ICON_COLOR],
                 ),
                 widget.Memory(
                     format="{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}",
-                    foreground=colors2[BAR_TEXT_COLOR],
+                    foreground=colors[BAR_TEXT_COLOR],
                 ),
                 widget.Spacer(length=10),
                 widget.TextBox(
                     text=" ",
-                    foreground=colors2[BAR_CLOCK_ICON_COLOR],
+                    foreground=colors[BAR_CLOCK_ICON_COLOR],
                 ),
                 MouseOverClock(
                     format="%I:%M %p",
                     long_format="%Y-%m-%d %I:%M %p",
-                    foreground=colors2[BAR_TEXT_COLOR],
+                    foreground=colors[BAR_TEXT_COLOR],
                 ),
                 # widget.Spacer(length=8),
                 # widget.TextBox(
@@ -401,7 +401,8 @@ bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
-    border_focus=colors2[ACTIVE_BODER_COLOR],
+    border_focus=colors[ACTIVE_BODER_COLOR],
+    border_normal=colors[INACTIVE_BORDER_COLOR],
     border_width=2,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
