@@ -23,6 +23,8 @@ tr=34:\
 tw=35:\
 tx=36:"
 
+BAT_THEME="Catppuccin Mocha"
+
 if [ -d "$HOME/.local/bin" ] ;
   then PATH="$HOME/.local/bin:$PATH"
 fi
