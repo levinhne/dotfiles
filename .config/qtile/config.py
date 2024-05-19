@@ -26,12 +26,8 @@
 
 import os
 import subprocess
-from libqtile.log_utils import logger
-from libqtile import bar, extension, hook, layout, qtile, widget
-from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
-from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal, send_notification
-import colors
+from libqtile import bar, hook
+from libqtile.config import Screen
 
 from layouts.settings import init_layouts
 from widgets.top import init_widgets
@@ -41,88 +37,25 @@ from bindings.groups import init_groups_keys, init_groups_keys
 from bindings.apps import init_apps_run
 from bindings.mouse import init_mouse_keys
 
+from groups.creator import init_name_creator
+
 from themes.dracula import Dracula
 
-colors2 = Dracula()
+color2 = Dracula()
 
-# colors
-colors = colors.Catppuccin
-
-BAR_BACKGROUND_COLOR = "surface0"
-BAR_TEXT_COLOR = "text"
-BAR_GROUP_BOX_ACTIVE_COLOR = "lavender"
-BAR_GROUP_BOX_INACTIVE_COLOR = "overlay2"
-BAR_GROUP_BOX_HIGHLIGHT_COLOR = "surface2"
-BAR_VOLUME_ICON_COLOR = "mauve"
-BAR_WIFI_ICON_COLOR = "mauve"
-BAR_CPU_ICON_COLOR = "mauve"
-BAR_MEM_ICON_COLOR = "mauve"
-BAR_CLOCK_ICON_COLOR = "darkblue"
-
-ACTIVE_BODER_COLOR = "lavender"
-INACTIVE_BORDER_COLOR = "overlay0"
-
-
-# groups = []
-# group_names = ["1", "2", "3", "4", "5", "6", "7", "8"]
-# group_labels = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"]
-# # group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "GFX",]
-# # group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
-# # group_labels = ["", "", "", "", "", "", "", "", "",]
-#
-#
-# group_layouts = [
-#     "max",
-#     "max",
-#     "max",
-#     "max",
-#     "max",
-#     "max",
-#     "max",
-#     "max",
-# ]
-#
-# for i in range(len(group_names)):
-#     groups.append(
-#         Group(
-#             name=group_names[i],
-#             layout=group_layouts[i].lower(),
-#             label=group_labels[i],
-#         )
-#     )
-#
-# for i in groups:
-#     keys.extend(
-#         [
-#             # mod1 + letter of group = switch to group
-#             Key(
-#                 [mod],
-#                 i.name,
-#                 lazy.group[i.name].toscreen(),
-#                 desc="Switch to group {}".format(i.name),
-#             ),
-#             # mod1 + shift + letter of group = move focused window to group
-#             Key(
-#                 [mod, "shift"],
-#                 i.name,
-#                 lazy.window.togroup(i.name, switch_group=False),
-#                 desc="Move focused window to group {}".format(i.name),
-#             ),
-#         ]
-#     )
-#
 layout_theme = dict(
     margin=5,
     border_width=2,
-    border_focus=colors2["pink"],
-    border_normal=colors2["cyan"],
+    border_focus=color2["pink"],
+    border_normal=color2["cyan"],
 )
 
 
 layouts = init_layouts(layout_theme)
 keys = init_keys()
-groups = init_groups_keys()
-keys.extend(groups)
+groups = init_name_creator()
+groups_bind = init_groups_keys()
+keys.extend(groups_bind)
 apps = init_apps_run()
 keys.extend(apps)
 
@@ -130,11 +63,11 @@ widget_defaults = dict(
     font="Iosevka Nerd Font SemiBold",
     fontsize=14,
     padding=3,
-    background=colors2["background"],
+    background=color2["background"],
 )
 extension_defaults = widget_defaults.copy()
 widgets_theme = widget_defaults.copy()
-widgets_theme.update(colors2)
+widgets_theme.update(color2)
 
 
 def init_bar():
@@ -163,22 +96,6 @@ follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
-# floating_layout = layout.Floating(
-#     border_focus=colors2["pink"],
-#     border_normal=colors[INACTIVE_BORDER_COLOR],
-#     border_width=2,
-#     float_rules=[
-#         # Run the utility of `xprop` to see the wm class and name of an X client.
-#         *layout.Floating.default_float_rules,
-#         Match(wm_class="confirmreset"),  # gitk
-#         Match(wm_class="makebranch"),  # gitk
-#         Match(wm_class="maketag"),  # gitk
-#         Match(wm_class="ssh-askpass"),  # ssh-askpass
-#         Match(wm_class="Pcmanfm"),
-#         Match(title="branchdialog"),  # gitk
-#         Match(title="pinentry"),  # GPG key password entry
-#     ],
-# )
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True

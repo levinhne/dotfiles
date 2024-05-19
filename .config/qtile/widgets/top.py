@@ -28,9 +28,9 @@ def init_widgets(config: dict):
             disable_drag=True,
             highlight_method="line",
             fontsize=16,
-            active=config["foreground"],
-            inactive=config["foreground"],
-            highlight_color=config["foreground"],
+            active=config["pink"],
+            inactive=config["current"],
+            highlight_color=config["purple"],
             this_current_screen_border=[
                 config["foreground"],
             ],

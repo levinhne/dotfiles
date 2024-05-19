@@ -28,7 +28,6 @@ def init_apps_run():
                 )
             ),
         ),
-        Key([mod], "b", lazy.spawn("brave"), desc="Launch brave"),
         Key(
             [
                 mod,
