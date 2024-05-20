@@ -3,6 +3,10 @@ from libqtile import widget
 from .custom.clock import MouseOverClock
 
 
+def func_test():
+    return "ok"
+
+
 def init_widgets(config: dict):
     widgets = [
         widget.Spacer(length=5),
@@ -40,6 +44,11 @@ def init_widgets(config: dict):
         widget.WindowName(
             max_chars=50,
         ),
+        widget.GenPollText(
+            func=func_test,
+            update_interval=5,
+        ),
+        widget.Spacer(length=10),
         widget.TextBox(
             text="",
             foreground=config["foreground"],
