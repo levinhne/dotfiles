@@ -27,9 +27,10 @@
 import os
 import subprocess
 from libqtile import bar, hook
-from libqtile.config import Screen
+from libqtile.config import Screen, Match
 
 from layouts.settings import init_layouts
+from libqtile.layout import floating
 from widgets.top import init_widgets
 
 from bindings.cores import init_keys
@@ -41,13 +42,13 @@ from groups.creator import init_name_creator
 
 from themes.dracula import Dracula
 
-color2 = Dracula()
+colors = Dracula()
 
 layout_theme = dict(
     margin=5,
     border_width=2,
-    border_focus=color2["layout_border_focus"],
-    border_normal=color2["layout_border_normal"],
+    border_focus=colors["base08"],
+    border_normal=colors["base02"],
 )
 
 layouts = init_layouts(layout_theme)
@@ -62,17 +63,17 @@ widget_defaults = dict(
     font="Iosevka Nerd Font SemiBold",
     fontsize=14,
     padding=3,
-    background=color2["background"],
+    colors=colors,
 )
 extension_defaults = widget_defaults.copy()
 widgets_theme = widget_defaults.copy()
-widgets_theme.update(color2)
 
 
 def init_bar():
     return bar.Bar(
         init_widgets(widgets_theme),
         30,
+        background=colors["base00"],
     )
 
 
@@ -95,6 +96,23 @@ follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
+floating_layout = floating.Floating(
+    border_width=2,
+    border_focus=colors["base08"],
+    border_normal=colors["base02"],
+    float_rules=[
+        # Run the utility of `xprop` to see the wm class and name of an X client.
+        *floating.Floating.default_float_rules,
+        Match(wm_class="confirmreset"),  # gitk
+        Match(wm_class="makebranch"),  # gitk
+        Match(wm_class="maketag"),  # gitk
+        Match(wm_class="ssh-askpass"),  # ssh-askpass
+        Match(wm_class="Pcmanfm"),
+        Match(title="branchdialog"),  # gitk
+        Match(title="pinentry"),  # GPG key password entry
+    ],
+)
+
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True

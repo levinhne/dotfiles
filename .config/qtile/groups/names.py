@@ -1,10 +1,10 @@
 def init_names():
+    label = " "
     group_names = [
-        ("I", {"layout": "max"}),
-        ("II", {"layout": "max"}),
-        ("III", {"layout": "max"}),
-        ("IV", {"layout": "max"}),
-        ("V", {"layout": "max"}),
-        ("VI", {"layout": "max"}),
+        ("1", {"layout": "max", "label": label}),
+        ("2", {"layout": "max", "label": label}),
+        ("3", {"layout": "max", "label": label}),
+        ("5", {"layout": "max", "label": label}),
+        ("6", {"layout": "max", "label": label}),
     ]
     return group_names

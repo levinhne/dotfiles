@@ -8,6 +8,7 @@ def func_test():
 
 
 def init_widgets(config: dict):
+    colors = config["colors"]
     widgets = [
         widget.Spacer(length=5),
         # widget.Image(
@@ -16,34 +17,33 @@ def init_widgets(config: dict):
         # ),
         widget.CurrentLayoutIcon(
             scale=0.5,
-            foreground=config["bar_text_color"],
+            foreground=colors["base00"],
         ),
         widget.CurrentLayout(
-            foreground=config["bar_text_color"],
+            foreground=colors["base05"],
         ),
         widget.Spacer(length=5),
         widget.GroupBox(
             margin_y=5,
             margin_x=5,
             padding_y=0,
-            padding_x=3,
-            borderwidth=2,
-            font="Iosevka Nerd Font",
+            # padding_x=3,
+            # borderwidth=2,
             disable_drag=True,
             highlight_method="line",
-            fontsize=16,
-            active=config["bar_group_box_active"],
-            inactive=config["bar_group_box_inactive"],
-            highlight_color=config["background"],
-            this_current_screen_border=config["comment"],
-            block_highlight_text_color=config["bar_group_box_active"],
+            fontsize=15,
+            active=colors["base03"],
+            inactive=colors["base01"],
+            highlight_color=colors["base00"],
+            this_current_screen_border=colors["base00"],
+            block_highlight_text_color=colors["base09"],
         ),
         widget.Spacer(length=5),
         widget.Prompt(),
         widget.Spacer(length=5),
         widget.WindowName(
             max_chars=50,
-            foreground=config["bar_text_color"],
+            foreground=colors["base05"],
         ),
         widget.GenPollText(
             func=func_test,
@@ -52,50 +52,50 @@ def init_widgets(config: dict):
         widget.Spacer(length=10),
         widget.TextBox(
             text="",
-            foreground=config["bar_text_color"],
+            foreground=colors["base05"],
         ),
         widget.Spacer(length=2),
         widget.Volume(
             limit_max_volume=True,
             fmt="{}",
-            foreground=config["bar_text_color"],
+            foreground=colors["base05"],
         ),
         widget.Spacer(length=10),
         widget.TextBox(
             text="󰤨 ",
-            foreground=config["bar_text_color"],
+            foreground=colors["base05"],
         ),
         widget.Net(
             format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
-            foreground=config["bar_text_color"],
+            foreground=colors["base05"],
         ),
         widget.Spacer(length=10),
         widget.TextBox(
             text=" ",
-            foreground=config["bar_text_color"],
+            foreground=colors["base05"],
         ),
         widget.CPU(
             format="{freq_current}GHz {load_percent}%",
-            foreground=config["bar_text_color"],
+            foreground=colors["base05"],
         ),
         widget.Spacer(length=10),
         widget.TextBox(
             text=" ",
-            foreground=config["bar_text_color"],
+            foreground=colors["base05"],
         ),
         widget.Memory(
             format="{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}",
-            foreground=config["bar_text_color"],
+            foreground=colors["base05"],
         ),
         widget.Spacer(length=10),
         widget.TextBox(
             text=" ",
-            foreground=config["bar_text_color"],
+            foreground=colors["base05"],
         ),
         MouseOverClock(
             format="%I:%M %p",
             long_format="%Y-%m-%d %I:%M %p",
-            foreground=config["bar_text_color"],
+            foreground=colors["base05"],
         ),
         # widget.Spacer(length=8),
         # widget.TextBox(
