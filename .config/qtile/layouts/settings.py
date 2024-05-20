@@ -1,4 +1,4 @@
-from libqtile.layout import floating, max
+from libqtile.layout import floating, max, xmonad
 
 
 # Define layouts
@@ -8,5 +8,6 @@ def init_layouts(layout_confing: dict):
     layouts = [
         floating.Floating(**layout_confing),
         max.Max(**max_layout_config),
+        xmonad.MonadTall(**layout_confing),
     ]
     return layouts

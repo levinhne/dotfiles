@@ -46,10 +46,9 @@ color2 = Dracula()
 layout_theme = dict(
     margin=5,
     border_width=2,
-    border_focus=color2["pink"],
-    border_normal=color2["cyan"],
+    border_focus=color2["layout_border_focus"],
+    border_normal=color2["layout_border_normal"],
 )
-
 
 layouts = init_layouts(layout_theme)
 keys = init_keys()
