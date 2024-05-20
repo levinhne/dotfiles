@@ -8,6 +8,8 @@ from .vars import (
     file_manager,
     mod,
     term,
+    dmenu,
+    dmenu_run,
 )
 
 
@@ -21,7 +23,7 @@ def init_apps_run():
             "F1",
             lazy.run_extension(
                 extension.DmenuRun(
-                    dmenu_command="dmenu_run -l 10",
+                    dmenu_command=dmenu_run,
                     dmenu_prompt=" ",
                     dmenu_font="Iosevka Nerd Font:size=10",
                     dmenu_height=26,
@@ -36,7 +38,7 @@ def init_apps_run():
             "x",
             lazy.run_extension(
                 extension.CommandSet(
-                    dmenu_command="dmenu -l 5",
+                    dmenu_command=dmenu,
                     dmenu_prompt=" ",
                     dmenu_font="Iosevka Nerd Font:size=10",
                     dmenu_height=26,

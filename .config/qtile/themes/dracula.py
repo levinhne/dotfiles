@@ -25,6 +25,7 @@ def Dracula():
         "red": "#ff5555",
         "yellow": "#f1fa8c",
         "bar_background_color": base["background"],
+        "bar_text_color": base["foreground"],
         "bar_group_box_active": base["purple"],
         "bar_group_box_inactive": base["comment"],
         "bar_group_box_highlight_color": base["background"],
