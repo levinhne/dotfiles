@@ -1,10 +1,7 @@
 from libqtile import widget
 
 from .custom.clock import MouseOverClock
-
-
-def func_test():
-    return "ok"
+from .custom.verbs import RandomVerb
 
 
 def init_widgets(config: dict):
@@ -25,10 +22,9 @@ def init_widgets(config: dict):
         widget.Spacer(length=5),
         widget.GroupBox(
             margin_y=5,
-            margin_x=5,
+            # margin_x=5,
             padding_y=0,
-            # padding_x=3,
-            # borderwidth=2,
+            padding_x=3,
             disable_drag=True,
             highlight_method="line",
             fontsize=15,
@@ -45,11 +41,15 @@ def init_widgets(config: dict):
             max_chars=50,
             foreground=colors["base05"],
         ),
-        widget.GenPollText(
-            func=func_test,
-            update_interval=5,
+        widget.TextBox(
+            text="󰊿 ",
+            foreground=colors["base0A"],
         ),
-        widget.Spacer(length=10),
+        RandomVerb(
+            foreground=colors["base0A"],
+            update_interval=15,
+        ),
+        widget.Spacer(length=15),
         widget.TextBox(
             text="",
             foreground=colors["base05"],
@@ -61,14 +61,14 @@ def init_widgets(config: dict):
             foreground=colors["base05"],
         ),
         widget.Spacer(length=10),
-        widget.TextBox(
-            text="󰤨 ",
-            foreground=colors["base05"],
-        ),
-        widget.Net(
-            format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
-            foreground=colors["base05"],
-        ),
+        # widget.TextBox(
+        #     text="󰤨 ",
+        #     foreground=colors["base05"],
+        # ),
+        # widget.Net(
+        #     format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
+        #     foreground=colors["base05"],
+        # ),
         widget.Spacer(length=10),
         widget.TextBox(
             text=" ",
