@@ -1,7 +1,6 @@
 from libqtile import widget
 
 from .custom.clock import MouseOverClock
-from .custom.verbs import RandomVerb
 
 
 def init_widgets(config: dict):
@@ -42,15 +41,6 @@ def init_widgets(config: dict):
             foreground=colors["base05"],
         ),
         widget.TextBox(
-            text="󰊿 ",
-            foreground=colors["base0A"],
-        ),
-        RandomVerb(
-            foreground=colors["base0A"],
-            update_interval=15,
-        ),
-        widget.Spacer(length=15),
-        widget.TextBox(
             text="",
             foreground=colors["base05"],
         ),
@@ -61,14 +51,14 @@ def init_widgets(config: dict):
             foreground=colors["base05"],
         ),
         widget.Spacer(length=10),
-        # widget.TextBox(
-        #     text="󰤨 ",
-        #     foreground=colors["base05"],
-        # ),
-        # widget.Net(
-        #     format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
-        #     foreground=colors["base05"],
-        # ),
+        widget.TextBox(
+            text="󰤨 ",
+            foreground=colors["base05"],
+        ),
+        widget.Net(
+            format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
+            foreground=colors["base05"],
+        ),
         widget.Spacer(length=10),
         widget.TextBox(
             text=" ",
