@@ -1,0 +1,4 @@
+[[items]]
+template = "qtile.tmpl"
+file = "~/dotfiles/.config/qtile/colors.py"
+

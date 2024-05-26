@@ -1,0 +1,11 @@
+# System: {{.System}}
+# Name: {{.Name}}
+# Author: {{.Author}}
+# Variant: {{.Variant}}
+
+def Dracula():
+    return {
+        {{- range $key, $value := .Palette}}
+          "{{$key}}": "#{{$value}}",
+        {{- end}}    
+    }
