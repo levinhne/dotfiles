@@ -21,9 +21,9 @@ def init_widgets(config: dict):
         widget.Spacer(length=5),
         widget.GroupBox(
             margin_y=5,
-            # margin_x=5,
             padding_y=0,
             padding_x=3,
+            borderwidth=0,
             disable_drag=True,
             highlight_method="line",
             fontsize=15,
@@ -87,27 +87,6 @@ def init_widgets(config: dict):
             long_format="%Y-%m-%d %I:%M %p",
             foreground=colors["base05"],
         ),
-        # widget.Spacer(length=8),
-        # widget.TextBox(
-        #     text="[X]",
-        #     fontsize=15,
-        #     foreground="#7797b7",
-        #     mouse_callbacks={
-        #         "Button1": lazy.run_extension(
-        #             extension.CommandSet(
-        #                 commands={
-        #                     "Oh": "1",
-        #                 },
-        #             )
-        #         )
-        #     },
-        # ),
-        # widget.QuickExit(
-        #     fontsize=14,
-        #     default_text=" ",
-        #     foreground="#bf616a",
-        #     countdown_format="[{}]",
-        # ),
         widget.Spacer(length=5),
     ]
     return widgets
