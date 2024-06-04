@@ -184,6 +184,7 @@
     "hoppscotch:Hoppscotch": 7,
     "insomnia:Insomnia": 7,
     "mongodb compass isolated edition:MongoDB Compass Isolated Edition": 7,
-    "mongodb compass:MongoDB Compass": 7
+    "mongodb compass:MongoDB Compass": 7,
+    "qutebrowser:qutebrowser": 7
   }
 }

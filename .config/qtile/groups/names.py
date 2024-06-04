@@ -1,5 +1,5 @@
 def init_names():
-    label = " "
+    label = " "
     group_names = [
         ("1", {"layout": "max", "label": label, "screen_affinity": 0}),
         ("2", {"layout": "max", "label": label, "screen_affinity": 0}),
