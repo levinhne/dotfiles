@@ -1,4 +1,4 @@
-from libqtile.layout import max, xmonad
+from libqtile.layout import max, xmonad, tree, columns
 
 
 # Define layouts
@@ -8,5 +8,7 @@ def init_layouts(layout_config: dict):
     layouts = [
         max.Max(**max_layout_config),
         xmonad.MonadTall(**layout_config),
+        tree.TreeTab(),
+        columns.Columns(),
     ]
     return layouts
