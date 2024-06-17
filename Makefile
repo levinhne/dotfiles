@@ -16,7 +16,8 @@ ifeq ($(shell yay --version 2>/dev/null),)
 endif
 
 install: folder yay xorg qtile terminal utilities filemanager dmenu ibus-bamboo themes fonts
-	stow --adopt .
+	sudo rm -rf 
+	stow --adopt ~/.bashrc
 xorg:
 	sudo pacman -S --noconfirm xorg xorg-server xcolor
 qtile:
