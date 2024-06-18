@@ -43,7 +43,9 @@ ibus-bamboo:
 themes:
 	yay -S --noconfirm dracula-gtk-theme papirus-icon-theme papirus-folders
 	papirus-folders -C indigo --theme Papirus-Dark
+
 	rm -rf ~/Downloads/Qogir-Cursors-Recolored 
+	mkdir -p  ~/.local/share/icons
 	git clone https://github.com/TeddyBearKilla/Qogir-Cursors-Recolored --depth=1 ~/Downloads/Qogir-Cursors-Recolored
 	cd ~/Downloads/Qogir-Cursors-Recolored/colors/Dracula/Purple && ./install.sh
 fonts:
