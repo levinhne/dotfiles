@@ -10,6 +10,7 @@ from .vars import (
     term,
     dmenu,
     dmenu_run,
+    maim,
 )
 
 
@@ -26,7 +27,6 @@ def init_apps_run():
                     dmenu_command=dmenu_run,
                     dmenu_prompt=" ",
                     dmenu_font="Iosevka Nerd Font:size=10",
-                    dmenu_height=26,
                 )
             ),
         ),
@@ -41,7 +41,6 @@ def init_apps_run():
                     dmenu_command=dmenu,
                     dmenu_prompt=" ",
                     dmenu_font="Iosevka Nerd Font:size=10",
-                    dmenu_height=26,
                     commands={
                         "Lock screen": "betterlockscreen -l dim",
                     },
@@ -49,6 +48,25 @@ def init_apps_run():
             ),
             desc="",
         ),
+        Key(
+            [
+                mod,
+                "shift",
+            ],
+            "x",
+            lazy.run_extension(
+                extension.CommandSet(
+                    dmenu_command=dmenu,
+                    dmenu_prompt=" ",
+                    dmenu_font="Iosevka Nerd Font:size=10",
+                    commands={
+                        "Lock screen": "betterlockscreen -l dim",
+                    },
+                )
+            ),
+            desc="",
+        ),
+        Key([mod], "s", lazy.spawn(maim, shell=True))
     ]
 
     return keys
