@@ -11,8 +11,7 @@ export XMODIFIERS=@im=ibus
 export QT4_IM_MODULE=ibus
 export CLUTTER_IM_MODULE=ibus
 
-
-xrandr --output HDMI-1 --primary --rate 75
+xrandr -r 75
 amddp=$(xrandr --query | grep '^DP-1')
 if [[ $amddp = *\ connected* ]]; then
   xrandr --output DP-1 --mode 1920x1080 --rate 60 --right-of HDMI-1
