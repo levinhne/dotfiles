@@ -29,8 +29,11 @@ terminal:
 	sudo pacman -S --noconfirm kitty tmux fish fisher starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit fzf
 utilities:
 	sudo pacman -S --noconfirm picom lxappearance ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils alsa-utils xdg-utils 
+	sudo pacman -S --noconfirm bluez bluez-utils blueman
 	yay -S --noconfirm betterlockscreen ksuperkey
 	sudo systemctl enable ly 
+	sudo sed -i 's/#AutoEnable=true/AutoEnable=true/g' /etc/bluetooth/main.conf
+	systemctl enable bluetooth
 filemanager:
 	sudo pacman -S --noconfirm pcmanfm ranger
 dmenu:

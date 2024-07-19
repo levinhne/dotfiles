@@ -1,6 +1,0 @@
-[submodule "test_config/nvim"]
-	path = test_config/nvim
-	url = git@github.com:levinhne/nvim.git
-[submodule ".config/nvim"]
-	path = .config/nvim
-	url = git@github.com:levinhne/nvim.git
