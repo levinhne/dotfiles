@@ -178,12 +178,14 @@
   "InputModeMapping": {
     "Alacritty:Alacritty": 7,
     "VirtualBox:VirtualBox": 7,
+    "anythingllm-desktop:anythingllm-desktop": 6,
     "brave-browser:Brave-browser": 6,
     "brave:Brave": 7,
     "code:Code": 7,
     "emacs:Emacs": 6,
     "hoppscotch:Hoppscotch": 7,
     "insomnia:Insomnia": 7,
+    "lm studio:LM Studio": 7,
     "mongodb compass isolated edition:MongoDB Compass Isolated Edition": 7,
     "mongodb compass:MongoDB Compass": 7,
     "qutebrowser:qutebrowser": 7
