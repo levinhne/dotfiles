@@ -15,7 +15,6 @@
   :config
   (evil-collection-init))
 
-
 (use-package which-key
   :init
     (which-key-mode 1)
@@ -34,6 +33,5 @@
 	  which-key-max-description-length 25
 	  which-key-allow-imprecise-window-fit nil
 	  which-key-separator " → " ))
-
 
 (provide 'init-evil)
