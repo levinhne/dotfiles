@@ -8,14 +8,13 @@
 
 
 (set-face-attribute 'default nil
-                    :family "Fira Code"
-                    :height 100
-                    :weight 'medium)
+  :family "Fira Code"
+  :height 100
+  :weight 'medium)
 
 (set-face-attribute 'variable-pitch nil
-                    :family "Gelasio" 
-                    :height 110)
-
+  :family "Gelasio" 
+  :height 110)
 
 (provide 'init-basic)
 

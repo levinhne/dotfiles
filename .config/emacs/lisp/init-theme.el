@@ -4,7 +4,7 @@
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+    doom-themes-enable-italic t) ; if nil, italics is universally disabled
   (load-theme 'doom-dracula t)
 
   ;; Enable flashing mode-line on errors
@@ -24,11 +24,11 @@
   :config
   ;; Optional: Configure doom-modeline
   (setq doom-modeline-height 22
-        doom-modeline-support-imenu t
-        doom-modeline-bar-width 3
-        doom-modeline-minor-modes nil
-        doom-modeline-icon t  ; Set to nil if you don't want icons
-        doom-modeline-major-mode-icon t
-        doom-modeline-buffer-file-name-style 'truncate-upto-root))
+    doom-modeline-support-imenu t
+    doom-modeline-bar-width 3
+    doom-modeline-minor-modes nil
+    doom-modeline-icon t  ; Set to nil if you don't want icons
+    doom-modeline-major-mode-icon t
+    doom-modeline-buffer-file-name-style 'truncate-upto-root))
 
 (provide 'init-theme)

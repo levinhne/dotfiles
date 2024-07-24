@@ -4,7 +4,6 @@
 
 (setq custom-file (locate-user-emacs-file "custom.el"))
 
-
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
