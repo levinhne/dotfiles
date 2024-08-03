@@ -22,18 +22,24 @@ xorg:
 	sudo pacman -S --noconfirm xorg xorg-server xcolor
 qtile:
 	sudo pacman -S --noconfirm qtile python-psutil python-dbus-next
+	echo "$USER $hostname =NOPASSWD: /usr/bin/systemctl poweroff,/usr/bin/systemctl reboot" > 01-pengurice-cmds-without-password
+	sudo mv 01-pengurice-cmds-without-password /etc/sudoers.d/01-pengurice-cmds-without-password
 terminal:
 	rm -rf ~/.config/nvim
 	rm -rf ~/.local/share/nvim
 	sudo pacman -S --noconfirm vi vim neovim
 	sudo pacman -S --noconfirm kitty tmux fish fisher starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit fzf
-utilities:
+utilities: betterlockscreen
 	sudo pacman -S --noconfirm picom lxappearance ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils alsa-utils xdg-utils 
 	sudo pacman -S --noconfirm bluez bluez-utils blueman
-	yay -S --noconfirm betterlockscreen ksuperkey
+	yay -S --noconfirm ksuperkey
 	sudo systemctl enable ly 
 	sudo sed -i 's/#AutoEnable=true/AutoEnable=true/g' /etc/bluetooth/main.conf
 	systemctl enable bluetooth
+betterlockscreen:
+	git clone https://github.com/Raymo111/i3lock-color.git
+	./i3lock-color/install-i3lock-color.sh
+	yay -S --noconfirm betterlockscreen ksuperkey
 filemanager:
 	sudo pacman -S --noconfirm pcmanfm ranger
 dmenu:
