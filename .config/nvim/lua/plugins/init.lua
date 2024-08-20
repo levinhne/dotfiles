@@ -16,8 +16,8 @@ return {
   --
   { import = "plugins.override.go" },
   { import = "plugins.override.fzf" },
-  { import = "plugins.override.helm" },
+  -- { import = "plugins.override.helm" },
   -- 
-  { import = "plugins.override.codeium" },
   { import = "plugins.override.copilot" },
+  -- { import = "plugins.override.codeium" },
 }

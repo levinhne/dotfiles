@@ -22,26 +22,25 @@ xorg:
 	sudo pacman -S --noconfirm xorg xorg-server xcolor
 qtile:
 	sudo pacman -S --noconfirm qtile python-psutil python-dbus-next
-	echo "$USER $hostname =NOPASSWD: /usr/bin/systemctl poweroff,/usr/bin/systemctl reboot" > 01-pengurice-cmds-without-password
-	sudo mv 01-pengurice-cmds-without-password /etc/sudoers.d/01-pengurice-cmds-without-password
 terminal:
 	rm -rf ~/.config/nvim
 	rm -rf ~/.local/share/nvim
 	sudo pacman -S --noconfirm vi vim neovim
 	sudo pacman -S --noconfirm kitty tmux fish fisher starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit fzf
-utilities: betterlockscreen
+utilities: 
 	sudo pacman -S --noconfirm picom lxappearance ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils alsa-utils xdg-utils 
 	sudo pacman -S --noconfirm bluez bluez-utils blueman
 	yay -S --noconfirm ksuperkey
 	sudo systemctl enable ly 
 	sudo sed -i 's/#AutoEnable=true/AutoEnable=true/g' /etc/bluetooth/main.conf
-	systemctl enable bluetooth
-betterlockscreen:
-	git clone https://github.com/Raymo111/i3lock-color.git
-	./i3lock-color/install-i3lock-color.sh
-	yay -S --noconfirm betterlockscreen ksuperkey
+	sudo systemctl enable bluetooth
+lockscreen:
+	rm -rf ~/Downloads/i3lock-color
+	git clone https://github.com/Raymo111/i3lock-color.git ~/Downloads/i3lock-color
+	cd ~/Downloads/i3lock-color && ./install-i3lock-color.sh
+	#wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | bash -s user
 filemanager:
-	sudo pacman -S --noconfirm pcmanfm ranger
+	sudo pacman -S --noconfirm qt5ct pcmanfm ranger
 dmenu:
 	rm -rf ~/Downloads/dmenu-distrotube
 	git clone https://gitlab.com/dwt1/dmenu-distrotube.git ~/Downloads/dmenu-distrotube
@@ -58,7 +57,7 @@ themes:
 	git clone https://github.com/TeddyBearKilla/Qogir-Cursors-Recolored --depth=1 ~/Downloads/Qogir-Cursors-Recolored
 	cd ~/Downloads/Qogir-Cursors-Recolored/colors/Dracula/Purple && ./install.sh
 fonts:
-	yay -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code ttf-firacode-nerd ttf-iosevka-nerd ttf-liberation ttf-font-awesome ttf-gelasio 
+	yay -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code ttf-firacode-nerd ttf-iosevka-nerd ttf-liberation ttf-font-awesome
 sshkey:
 	ssh-keygen -t rsa -C "$(USER)"
 	eval "$$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa
