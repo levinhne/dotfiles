@@ -1,7 +1,7 @@
 local plugins = {
   {
     "github/copilot.vim",
-    -- event = "BufEnter",
+    event = "BufEnter",
     config = function()
       vim.g.copilot_filetypes = {
         html = false,

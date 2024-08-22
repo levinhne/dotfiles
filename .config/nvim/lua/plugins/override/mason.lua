@@ -21,7 +21,7 @@ local plugins = {
         "pyright",
 
         -- php
-        "intelephense",
+        -- "intelephense",
 
         -- javascript
         "deno",
@@ -35,11 +35,11 @@ local plugins = {
         "html-lsp",
         -- css
         "css-lsp",
-        "tailwindcss-language-server",
+        -- "tailwindcss-language-server",
 
         -- devops
-        "helm-ls",
-        "dockerfile-language-server",
+        -- "helm-ls",
+        -- "dockerfile-language-server",
         "yaml-language-server",
       },
     },

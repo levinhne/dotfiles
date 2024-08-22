@@ -1,7 +1,7 @@
 local plugins = {
 	{
 		"junegunn/fzf",
-    event = "User FilePost",
+    	event = "User FilePost",
 	},
 }
 
