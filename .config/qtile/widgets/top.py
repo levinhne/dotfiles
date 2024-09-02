@@ -2,7 +2,6 @@ from libqtile import widget
 
 from .custom.clock import MouseOverClock
 
-
 def init_widgets(config: dict):
     colors = config["colors"]
     widgets = [

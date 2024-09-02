@@ -38,7 +38,7 @@ lockscreen:
 	rm -rf ~/Downloads/i3lock-color
 	git clone https://github.com/Raymo111/i3lock-color.git ~/Downloads/i3lock-color
 	cd ~/Downloads/i3lock-color && ./install-i3lock-color.sh
-	#wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | bash -s user
+	wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | bash -s user
 filemanager:
 	sudo pacman -S --noconfirm qt5ct pcmanfm ranger
 dmenu:
