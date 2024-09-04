@@ -5,16 +5,11 @@ local capabilities = require("nvchad.configs.lspconfig").capabilities
 local util = require "lspconfig/util"
 
 local servers = {
-  jsonls = {},
-  html = {},
-  cssls = {},
-  tailwindcss = {},
-
   -- go
   gopls = {
     cmd = { "gopls" },
     filetypes = { "go", "gomod", "gowork", "gotmpl", "tmpl" },
-    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+    root_dir = util.root_pattern("go.work", "go.mod"),
     settings = {
       gopls = {
         buildFlags = { "-tags=wireinject" },
@@ -31,8 +26,12 @@ local servers = {
 
   jdtls = {},
   -- javascript/typesctipt
-  tsserver = {},
-  denols = {},
+  tsserver = {
+    root_dir = util.root_pattern("package.json", "tsconfig.json"),
+  },
+  denols = {
+    root_dir = util.root_pattern("deno.json", "deno.jsonc"),
+  },
   eslint = {},
 
   --php
@@ -62,8 +61,14 @@ local servers = {
     cmd = { "lua-language-server" },
     filetypes = { "lua" },
   },
-}
 
+  jsonls = {},
+  html = {},
+  cssls = {},
+  tailwindcss = {
+    root_dir = util.root_pattern("tailwind.config.js", "tailwind.config.cjs"),
+  },
+}
 
 for name, opts in pairs(servers) do
   opts.on_init = on_init

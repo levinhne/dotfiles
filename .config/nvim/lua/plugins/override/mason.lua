@@ -35,7 +35,7 @@ local plugins = {
         "html-lsp",
         -- css
         "css-lsp",
-        -- "tailwindcss-language-server",
+        "tailwindcss-language-server",
 
         -- devops
         -- "helm-ls",

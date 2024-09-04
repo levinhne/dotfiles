@@ -11,7 +11,7 @@ home = os.path.expanduser("~")
 
 # set the varible apps
 term = "kitty"
-browser = "brave"
+browser = "google-chrome-stable"
 file_manager = "pcmanfm"
 qt5_config = "qt5ct"
 dmenu = "dmenu -c -h 30"

@@ -17,4 +17,3 @@ map("i", "<C-CR>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes =
 map("i", "<C-L>", "<Plug>(copilot-accept-word)")
 
 map("n", "<leader>kr", ":lua require('kulala').run()<CR>", { noremap = true, silent = true })
-

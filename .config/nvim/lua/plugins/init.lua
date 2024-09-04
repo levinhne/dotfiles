@@ -7,6 +7,7 @@ return {
   { import = "plugins.override.flash" },
   --
   { import = "plugins.override.mason" },
+  { import = "plugins.override.cmp" },
   { import = "plugins.override.lspconfig" },
   { import = "plugins.override.conform" },
   { import = "plugins.override.dap" },

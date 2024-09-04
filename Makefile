@@ -30,7 +30,7 @@ terminal:
 utilities: 
 	sudo pacman -S --noconfirm picom lxappearance ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils alsa-utils xdg-utils 
 	sudo pacman -S --noconfirm bluez bluez-utils blueman
-	yay -S --noconfirm ksuperkey
+	yay -S --noconfirm ksuperkey redshift
 	sudo systemctl enable ly 
 	sudo sed -i 's/#AutoEnable=true/AutoEnable=true/g' /etc/bluetooth/main.conf
 	sudo systemctl enable bluetooth
