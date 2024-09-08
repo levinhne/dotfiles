@@ -5,7 +5,7 @@ return {
   { import = "plugins.override.zoxide" },
   { import = "plugins.override.visual-multi" },
   { import = "plugins.override.flash" },
-  { import = "plugins.override.indent-blankline" },
+  -- { import = "plugins.override.indent-blankline" },
   --
   { import = "plugins.override.mason" },
   { import = "plugins.override.cmp" },
