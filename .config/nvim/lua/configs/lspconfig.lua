@@ -26,7 +26,7 @@ local servers = {
 
   jdtls = {},
   -- javascript/typesctipt
-  tsserver = {
+  ts_ls = {
     root_dir = util.root_pattern("package.json", "tsconfig.json"),
   },
   denols = {
