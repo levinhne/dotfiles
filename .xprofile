@@ -35,7 +35,7 @@ picom --daemon &
 
 feh --bg-fill ~/.wallpapers/
 
-redshift -c ~/.config/redshift/redshift.conf &
+# redshift -c ~/.config/redshift/redshift.conf &
 
 clipcatd
 

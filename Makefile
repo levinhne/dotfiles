@@ -1,6 +1,19 @@
-NODE_VERSION ?= --lts
 
-.PHONY: install
+# Makefile to manage system configuration and installation
+
+NODE_VERSION ?= --lts
+USER ?= $(shell whoami)  # Default to the current user
+
+.PHONY: install folder yay xorg qtile terminal utilities filemanager dmenu ibus-bamboo themes fonts sshkey devops go node virtualbox docker-compose update sudoers
+
+# Define common commands
+PACMAN_CMD = sudo pacman -S --noconfirm
+YAY_CMD = yay -S --noconfirm
+GIT_CMD = git clone
+RM_CMD = rm -rf
+
+# Default target
+install: folder yay xorg qtile terminal utilities filemanager dmenu ibus-bamboo themes fonts sshkey devops go node virtualbox docker-compose sudoers
 
 folder:
 	cd ~ && mkdir -p {Desktop,Develop,Documents,Downloads,Pictures,Pictures/Wallpapers,Videos}
@@ -8,69 +21,89 @@ folder:
 	sudo sed -i 's/#ParallelDownload/ParallelDownload/g' /etc/pacman.conf
 
 yay:
-ifeq ($(shell yay --version 2>/dev/null),)
-	rm -rf ~/Downloads/yay-bin/
-	git clone https://aur.archlinux.org/yay-bin.git ~/Downloads/yay-bin
-	cd ~/Downloads/yay-bin/ && makepkg -si
-	rm -rf yay-bin
-endif
+	if ! command -v yay > /dev/null; then \
+		$(RM_CMD) ~/Downloads/yay-bin/; \
+		$(GIT_CMD) https://aur.archlinux.org/yay-bin.git ~/Downloads/yay-bin; \
+		cd ~/Downloads/yay-bin/ && makepkg -si; \
+		$(RM_CMD) yay-bin; \
+	fi
 
-install: folder yay xorg qtile terminal utilities filemanager dmenu ibus-bamboo themes fonts
-	sudo rm -rf ~/.bashrc
-	stow --adopt .
 xorg:
-	sudo pacman -S --noconfirm xorg xorg-server xcolor
+	$(PACMAN_CMD) xorg xorg-server xcolor
+
 qtile:
-	sudo pacman -S --noconfirm qtile python-psutil python-dbus-next
+	$(PACMAN_CMD) qtile python-psutil python-dbus-next
+
 terminal:
-	rm -rf ~/.config/nvim
-	rm -rf ~/.local/share/nvim
-	sudo pacman -S --noconfirm vi vim neovim
-	sudo pacman -S --noconfirm kitty tmux fish fisher starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit fzf
+	$(RM_CMD) ~/.config/nvim ~/.local/share/nvim
+	$(PACMAN_CMD) vi vim neovim kitty tmux fish fisher starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit
+
 utilities: 
-	sudo pacman -S --noconfirm picom lxappearance ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils alsa-utils xdg-utils 
-	sudo pacman -S --noconfirm bluez bluez-utils blueman
-	yay -S --noconfirm ksuperkey redshift
+	$(PACMAN_CMD) picom lxappearance ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils alsa-utils xdg-utils 
+	$(PACMAN_CMD) bluez bluez-utils blueman
+	$(YAY_CMD) ksuperkey redshift
 	sudo systemctl enable ly 
 	sudo sed -i 's/#AutoEnable=true/AutoEnable=true/g' /etc/bluetooth/main.conf
 	sudo systemctl enable bluetooth
+
 lockscreen:
-	rm -rf ~/Downloads/i3lock-color
-	git clone https://github.com/Raymo111/i3lock-color.git ~/Downloads/i3lock-color
+	$(RM_CMD) ~/Downloads/i3lock-color
+	$(GIT_CMD) https://github.com/Raymo111/i3lock-color.git ~/Downloads/i3lock-color
 	cd ~/Downloads/i3lock-color && ./install-i3lock-color.sh
 	wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | bash -s user
+
 filemanager:
-	sudo pacman -S --noconfirm qt5ct pcmanfm ranger
+	$(PACMAN_CMD) qt5ct pcmanfm ranger
+
 dmenu:
-	rm -rf ~/Downloads/dmenu-distrotube
-	git clone https://gitlab.com/dwt1/dmenu-distrotube.git ~/Downloads/dmenu-distrotube
-	cd ~/Downloads/dmenu-distrotube/ && sudo make clean install && rm -rf config.h
+	$(RM_CMD) ~/Downloads/dmenu-distrotube
+	$(GIT_CMD) https://gitlab.com/dwt1/dmenu-distrotube.git ~/Downloads/dmenu-distrotube
+	cd ~/Downloads/dmenu-distrotube/ && sudo make clean install && $(RM_CMD) config.h
+
 ibus-bamboo:
-	yay -S --noconfirm ibus-bamboo
+	$(YAY_CMD) ibus-bamboo
 	dconf load /desktop/ibus/ < ibus.dconf
+
 themes:
-	yay -S --noconfirm dracula-gtk-theme papirus-icon-theme papirus-folders
+	$(YAY_CMD) dracula-gtk-theme papirus-icon-theme papirus-folders
 	papirus-folders -C indigo --theme Papirus-Dark
 
-	rm -rf ~/Downloads/Qogir-Cursors-Recolored 
-	mkdir -p  ~/.local/share/icons
-	git clone https://github.com/TeddyBearKilla/Qogir-Cursors-Recolored --depth=1 ~/Downloads/Qogir-Cursors-Recolored
+	$(RM_CMD) ~/Downloads/Qogir-Cursors-Recolored 
+	mkdir -p ~/.local/share/icons
+	$(GIT_CMD) https://github.com/TeddyBearKilla/Qogir-Cursors-Recolored --depth=1 ~/Downloads/Qogir-Cursors-Recolored
 	cd ~/Downloads/Qogir-Cursors-Recolored/colors/Dracula/Purple && ./install.sh
+
 fonts:
-	yay -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code ttf-firacode-nerd ttf-iosevka-nerd ttf-liberation ttf-font-awesome
+	$(YAY_CMD) noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code ttf-firacode-nerd ttf-iosevka-nerd ttf-liberation ttf-font-awesome
+
 sshkey:
 	ssh-keygen -t rsa -C "$(USER)"
 	eval "$$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa
 	bat ~/.ssh/id_rsa.pub
 	xclip -sel clip < ~/.ssh/id_rsa.pub
+
 devops:
-	sudo pacman -S --noconfirm docker docker-compose docker-buildx minikube helm kubectl k9s
+	$(PACMAN_CMD) docker docker-compose docker-buildx minikube helm kubectl k9s
 	sudo usermod -aG docker $(USER)
+
 go:
-	sudo pacman -S --noconfirm go
+	$(PACMAN_CMD) go
+
 node:
-	yay -S --noconfirm fnm-bin
+	$(YAY_CMD) fnm-bin
 	fnm install $(NODE_VERSION)
+
 virtualbox:
-	sudo pacman -S --noconfirm linux-headers virtualbox virtualbox-guest-utils
+	$(PACMAN_CMD) linux-headers virtualbox virtualbox-guest-utils
 	sudo modprobe vboxdrv
+
+docker-compose:
+	$(PACMAN_CMD) docker-compose
+
+update:
+	sudo pacman -Syu
+	$(YAY_CMD) -Syu
+
+sudoers:
+	sudo sh -c 'echo "$(USER) ALL=(ALL) NOPASSWD: /usr/bin/systemctl poweroff, /usr/bin/systemctl halt, /usr/bin/systemctl reboot" > /etc/sudoers.d/$(USER)'
+	sudo visudo -c -f /etc/sudoers.d/$(USER)  # Check the syntax of the sudoers file

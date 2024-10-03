@@ -3,8 +3,19 @@
 export TERM="xterm-256color"
 export vim="nvim"
 
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+### PATH
+if [ -d "$HOME/.local/bin" ] ;
+  then PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -d "$HOME/go" ] ; then
+  export GOPATH=$HOME/go
+  export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+fi
+
+if [ -d "$HOME/.local/bin/flutter/bin" ] ; then
+  export PATH="$PATH:$HOME/.local/bin/flutter/bin"
+fi
 
 export EXA_COLORS="\
 uu=36:\
