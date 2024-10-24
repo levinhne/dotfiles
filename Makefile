@@ -3,7 +3,7 @@
 NODE_VERSION ?= --lts
 USER ?= $(shell whoami)  # Default to the current user
 
-.PHONY: install folder yay xorg qtile terminal utilities filemanager dmenu ibus-bamboo themes fonts sshkey devops go node virtualbox docker-compose update sudoers check-usb find-iso iso-to-usb
+.PHONY: install folder yay xorg qtile terminal utilities filemanager dmenu ibus-bamboo themes fonts sshkey devops go node virtualbox docker-compose update sudoers check-usb find-iso iso-to-usb clean
 
 # Define common commands
 PACMAN_CMD = sudo pacman -S --noconfirm
@@ -123,3 +123,8 @@ iso-to-usb: check-usb find-iso
 	@iso_file=$$(find ../Downloads -type f -name "*.iso" | head -n 1); \
 	read -p "Enter the USB device (e.g., /dev/sdb): " usb_device; \
 	sudo dd if=$$iso_file of=$$usb_device bs=4M status=progress conv=fsync
+
+clean:
+	@find . -type d -name "__pycache__" -exec rm -rf {} +
+	@find . -type f -name "*.pyc" -delete
+	@find . -type f -name "*.pyo" -delete
