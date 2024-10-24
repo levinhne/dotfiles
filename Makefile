@@ -1,10 +1,9 @@
-
 # Makefile to manage system configuration and installation
 
 NODE_VERSION ?= --lts
 USER ?= $(shell whoami)  # Default to the current user
 
-.PHONY: install folder yay xorg qtile terminal utilities filemanager dmenu ibus-bamboo themes fonts sshkey devops go node virtualbox docker-compose update sudoers
+.PHONY: install folder yay xorg qtile terminal utilities filemanager dmenu ibus-bamboo themes fonts sshkey devops go node virtualbox docker-compose update sudoers check-usb find-iso iso-to-usb
 
 # Define common commands
 PACMAN_CMD = sudo pacman -S --noconfirm
@@ -107,3 +106,20 @@ update:
 sudoers:
 	sudo sh -c 'echo "$(USER) ALL=(ALL) NOPASSWD: /usr/bin/systemctl poweroff, /usr/bin/systemctl halt, /usr/bin/systemctl reboot" > /etc/sudoers.d/$(USER)'
 	sudo visudo -c -f /etc/sudoers.d/$(USER)  # Check the syntax of the sudoers file
+
+check-usb:
+	lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
+
+find-iso:
+	@iso_file=$$(find ../Downloads -type f -name "*.iso" | head -n 1); \
+	if [ -z "$$iso_file" ]; then \
+		echo "No ISO file found in Downloads."; \
+		exit 1; \
+	else \
+		echo "Found ISO file: $$iso_file"; \
+	fi
+
+iso-to-usb: check-usb find-iso
+	@iso_file=$$(find ../Downloads -type f -name "*.iso" | head -n 1); \
+	read -p "Enter the USB device (e.g., /dev/sdb): " usb_device; \
+	sudo dd if=$$iso_file of=$$usb_device bs=4M status=progress conv=fsync
