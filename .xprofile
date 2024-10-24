@@ -40,3 +40,5 @@ feh --bg-fill ~/.wallpapers/
 clipcatd
 
 ibus-daemon -drx
+
+ibus restart

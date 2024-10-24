@@ -52,7 +52,7 @@ lockscreen:
 	wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | bash -s user
 
 filemanager:
-	$(PACMAN_CMD) qt5ct pcmanfm ranger
+	$(PACMAN_CMD) qt5ct ranger
 
 dmenu:
 	$(RM_CMD) ~/Downloads/dmenu-distrotube
