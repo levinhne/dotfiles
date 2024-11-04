@@ -1,0 +1,1 @@
+/home/levinhne/.config/emacs/straight/repos/selection-highlight-mode/selection-highlight-mode.el

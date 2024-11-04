@@ -1,0 +1,1 @@
+/home/levinhne/.config/emacs/straight/repos/seq/seq-24.el

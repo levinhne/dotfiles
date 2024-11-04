@@ -1,7 +1,18 @@
 local plugins = {
   {
     "williamboman/mason.nvim",
+    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
     opts = {
+      PATH = "skip",
+      ui = {
+        icons = {
+          package_pending = " ",
+          package_installed = " ",
+          package_uninstalled = " ",
+        },
+      },
+
+      max_concurrent_installers = 10,
       ensure_installed = {
         -- lua
         "lua-language-server",

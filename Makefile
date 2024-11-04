@@ -1,25 +1,25 @@
-# Makefile to manage system configuration and installation
+# Makefile để quản lý cấu hình hệ thống và cài đặt
 
 NODE_VERSION ?= --lts
-USER ?= $(shell whoami)  # Default to the current user
+USER ?= $(shell whoami)  # Mặc định là người dùng hiện tại
 
-.PHONY: install folder yay xorg qtile terminal utilities filemanager dmenu ibus-bamboo themes fonts sshkey devops go node virtualbox docker-compose update sudoers check-usb find-iso iso-to-usb clean
+.PHONY: install setup-folders install-yay install-xorg install-qtile install-terminal-tools install-utilities install-filemanager install-dmenu configure-ibus install-themes install-fonts configure-sudoers generate-ssh-key setup-devops install-golang install-nodejs install-virtualbox install-docker update-system check-usb find-iso iso-to-usb clean
 
-# Define common commands
+# Định nghĩa các lệnh chung
 PACMAN_CMD = sudo pacman -S --noconfirm
 YAY_CMD = yay -S --noconfirm
 GIT_CMD = git clone
 RM_CMD = rm -rf
 
-# Default target
-install: folder yay xorg qtile terminal utilities filemanager dmenu ibus-bamboo themes fonts sshkey devops go node virtualbox docker-compose sudoers
+# Mục tiêu mặc định
+install: setup-folders install-yay install-xorg install-qtile install-terminal-tools install-utilities install-filemanager install-dmenu configure-ibus install-themes install-fonts install-golang install-nodejs configure-sudoers
 
-folder:
+setup-folders:
 	cd ~ && mkdir -p {Desktop,Develop,Documents,Downloads,Pictures,Pictures/Wallpapers,Videos}
 	sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
 	sudo sed -i 's/#ParallelDownload/ParallelDownload/g' /etc/pacman.conf
 
-yay:
+install-yay:
 	if ! command -v yay > /dev/null; then \
 		$(RM_CMD) ~/Downloads/yay-bin/; \
 		$(GIT_CMD) https://aur.archlinux.org/yay-bin.git ~/Downloads/yay-bin; \
@@ -27,17 +27,17 @@ yay:
 		$(RM_CMD) yay-bin; \
 	fi
 
-xorg:
+install-xorg:
 	$(PACMAN_CMD) xorg xorg-server xcolor
 
-qtile:
+install-qtile:
 	$(PACMAN_CMD) qtile python-psutil python-dbus-next
 
-terminal:
+install-terminal-tools:
 	$(RM_CMD) ~/.config/nvim ~/.local/share/nvim
 	$(PACMAN_CMD) vi vim neovim kitty tmux fish fisher starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit
 
-utilities: 
+install-utilities: 
 	$(PACMAN_CMD) picom lxappearance ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils alsa-utils xdg-utils 
 	$(PACMAN_CMD) bluez bluez-utils blueman
 	$(YAY_CMD) ksuperkey redshift
@@ -45,25 +45,25 @@ utilities:
 	sudo sed -i 's/#AutoEnable=true/AutoEnable=true/g' /etc/bluetooth/main.conf
 	sudo systemctl enable bluetooth
 
-lockscreen:
+configure-lockscreen:
 	$(RM_CMD) ~/Downloads/i3lock-color
 	$(GIT_CMD) https://github.com/Raymo111/i3lock-color.git ~/Downloads/i3lock-color
-	cd ~/Downloads/i3lock-color && ./install-i3lock-color.sh
-	wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | bash -s user
+	cd ~/Downloads/i3lock-color && sudo ./install-i3lock-color.sh
+	wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system
 
-filemanager:
+install-filemanager:
 	$(PACMAN_CMD) qt5ct ranger
 
-dmenu:
+install-dmenu:
 	$(RM_CMD) ~/Downloads/dmenu-distrotube
 	$(GIT_CMD) https://gitlab.com/dwt1/dmenu-distrotube.git ~/Downloads/dmenu-distrotube
 	cd ~/Downloads/dmenu-distrotube/ && sudo make clean install && $(RM_CMD) config.h
 
-ibus-bamboo:
+configure-ibus:
 	$(YAY_CMD) ibus-bamboo
 	dconf load /desktop/ibus/ < ibus.dconf
 
-themes:
+install-themes:
 	$(YAY_CMD) dracula-gtk-theme papirus-icon-theme papirus-folders
 	papirus-folders -C indigo --theme Papirus-Dark
 
@@ -72,40 +72,37 @@ themes:
 	$(GIT_CMD) https://github.com/TeddyBearKilla/Qogir-Cursors-Recolored --depth=1 ~/Downloads/Qogir-Cursors-Recolored
 	cd ~/Downloads/Qogir-Cursors-Recolored/colors/Dracula/Purple && ./install.sh
 
-fonts:
+install-fonts:
 	$(YAY_CMD) noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code ttf-firacode-nerd ttf-iosevka-nerd ttf-liberation ttf-font-awesome
 
-sshkey:
+configure-sudoers:
+	sudo sh -c 'echo "$(USER) ALL=(ALL) NOPASSWD: /usr/bin/systemctl poweroff, /usr/bin/systemctl halt, /usr/bin/systemctl reboot" > /etc/sudoers.d/$(USER)'
+	sudo visudo -c -f /etc/sudoers.d/$(USER)  # Kiểm tra cú pháp của file sudoers
+
+generate-ssh-key:
 	ssh-keygen -t rsa -C "$(USER)"
 	eval "$$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa
 	bat ~/.ssh/id_rsa.pub
 	xclip -sel clip < ~/.ssh/id_rsa.pub
 
-devops:
-	$(PACMAN_CMD) docker docker-compose docker-buildx minikube helm kubectl k9s
+install-docker:
+	$(PACMAN_CMD) docker docker-compose docker-buildx
 	sudo usermod -aG docker $(USER)
 
-go:
+install-golang:
 	$(PACMAN_CMD) go
 
-node:
+install-nodejs:
 	$(YAY_CMD) fnm-bin
 	fnm install $(NODE_VERSION)
 
-virtualbox:
+install-virtualbox:
 	$(PACMAN_CMD) linux-headers virtualbox virtualbox-guest-utils
 	sudo modprobe vboxdrv
 
-docker-compose:
-	$(PACMAN_CMD) docker-compose
-
-update:
-	sudo pacman -Syu
-	$(YAY_CMD) -Syu
-
-sudoers:
-	sudo sh -c 'echo "$(USER) ALL=(ALL) NOPASSWD: /usr/bin/systemctl poweroff, /usr/bin/systemctl halt, /usr/bin/systemctl reboot" > /etc/sudoers.d/$(USER)'
-	sudo visudo -c -f /etc/sudoers.d/$(USER)  # Check the syntax of the sudoers file
+apply-dotfiles:
+	rm -rf ~/.bashrc
+	stow . --adopt
 
 check-usb:
 	lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
@@ -113,15 +110,15 @@ check-usb:
 find-iso:
 	@iso_file=$$(find ../Downloads -type f -name "*.iso" | head -n 1); \
 	if [ -z "$$iso_file" ]; then \
-		echo "No ISO file found in Downloads."; \
+		echo "Không tìm thấy file ISO trong thư mục Downloads."; \
 		exit 1; \
 	else \
-		echo "Found ISO file: $$iso_file"; \
+		echo "Đã tìm thấy file ISO: $$iso_file"; \
 	fi
 
 iso-to-usb: check-usb find-iso
-	@iso_file=$$(find ../Downloads -type f -name "*.iso" | head -n 1); \
-	read -p "Enter the USB device (e.g., /dev/sdb): " usb_device; \
+	@iso_file=$$(find ~/Downloads -type f -name "*.iso" | head -n 1); \
+	read -p "Nhập thiết bị USB (ví dụ: /dev/sdb): " usb_device; \
 	sudo dd if=$$iso_file of=$$usb_device bs=4M status=progress conv=fsync
 
 clean:

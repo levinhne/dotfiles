@@ -1,0 +1,1 @@
+/home/levinhne/.config/emacs/straight/repos/ligature.el/ligature.el
