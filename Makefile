@@ -1,17 +1,12 @@
-# Makefile để quản lý cấu hình hệ thống và cài đặt
-
-NODE_VERSION ?= --lts
-USER ?= $(shell whoami)  # Mặc định là người dùng hiện tại
+USER ?= $(shell whoami)  
 
 .PHONY: install setup-folders install-yay install-xorg install-qtile install-terminal-tools install-utilities install-filemanager install-dmenu configure-ibus install-themes install-fonts configure-sudoers generate-ssh-key setup-devops install-golang install-nodejs install-virtualbox install-docker update-system check-usb find-iso iso-to-usb clean
 
-# Định nghĩa các lệnh chung
 PACMAN_CMD = sudo pacman -S --noconfirm
 YAY_CMD = yay -S --noconfirm
 GIT_CMD = git clone
 RM_CMD = rm -rf
 
-# Mục tiêu mặc định
 install: setup-folders install-yay install-xorg install-qtile install-terminal-tools install-utilities install-filemanager install-dmenu configure-ibus install-themes install-fonts install-golang install-nodejs configure-sudoers
 
 setup-folders:
@@ -94,7 +89,9 @@ install-golang:
 
 install-nodejs:
 	$(YAY_CMD) fnm-bin
-	fnm install $(NODE_VERSION)
+
+install-pyenv:
+	$(YAY_CMD) pyenv
 
 install-virtualbox:
 	$(PACMAN_CMD) linux-headers virtualbox virtualbox-guest-utils
