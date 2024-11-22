@@ -81,7 +81,7 @@ generate-ssh-key:
 	xclip -sel clip < ~/.ssh/id_rsa.pub
 
 install-docker:
-	$(PACMAN_CMD) docker docker-compose docker-buildx
+	$(PACMAN_CMD) docker docker-compose docker-buildx lazydocker
 	sudo usermod -aG docker $(USER)
 
 install-golang:

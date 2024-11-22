@@ -1,17 +1,9 @@
+from libqtile import extension
 from libqtile.config import Key
 from libqtile.lazy import lazy
-from libqtile import extension
 
 # Modules and Others Config files
-from .vars import (
-    browser,
-    file_manager,
-    mod,
-    term,
-    dmenu,
-    dmenu_run,
-    maim,
-)
+from .vars import browser, dmenu, dmenu_run, file_manager, maim, mod, term
 
 
 def init_apps_run():
@@ -20,8 +12,8 @@ def init_apps_run():
         Key([mod], "b", lazy.spawn(browser)),
         Key([mod], "e", lazy.spawn(file_manager)),
         Key(
-            ["mod1"],
-            "F1",
+            [mod],
+            "r",
             lazy.run_extension(
                 extension.DmenuRun(
                     dmenu_command=dmenu_run,
@@ -44,13 +36,13 @@ def init_apps_run():
                     commands={
                         "Lock screen": "betterlockscreen -l dim",
                         "Reboot": "sudo systemctl reboot",
-                        "Shutdown": "sudo systemctl poweroff"
+                        "Shutdown": "sudo systemctl poweroff",
                     },
                 )
             ),
             desc="",
         ),
-        Key([mod], "s", lazy.spawn(maim, shell=True))
+        Key([mod], "s", lazy.spawn(maim, shell=True)),
     ]
 
     return keys
