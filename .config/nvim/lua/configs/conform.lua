@@ -5,6 +5,8 @@ local options = {
     html = { "prettier" },
     json = { "prettier" },
     javascript = { { "prettierd", "prettier" } },
+    typescript = { { "prettierd", "prettier" } },
+    typescriptreact = { { "prettierd", "prettier" } },
     yml = { { "prettierd", "prettier" } },
     yaml = { { "prettierd", "prettier" } },
   },

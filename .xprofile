@@ -33,6 +33,8 @@ ksuperkey -e 'Super_R=Alt_L|F1' &
 
 picom --daemon &
 
+emacs --daemon &
+
 feh --bg-fill ~/.wallpapers/
 
 # redshift -c ~/.config/redshift/redshift.conf &
