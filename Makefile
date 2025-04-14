@@ -7,7 +7,7 @@ YAY_CMD = yay -S --noconfirm
 GIT_CMD = git clone
 RM_CMD = rm -rf
 
-install: setup-folders install-yay install-xorg install-qtile install-terminal-tools install-utilities install-filemanager install-dmenu configure-ibus install-themes install-fonts install-golang install-nodejs configure-sudoers
+install: setup-folders install-yay install-xorg install-qtile install-terminal-tools install-utilities install-filemanager install-dmenu configure-ibus install-themes install-fonts install-golang install-nodejs configure-sudoers apply-dotfiles
 
 setup-folders:
 	cd ~ && mkdir -p {Desktop,Develop,Documents,Downloads,Pictures,Pictures/Wallpapers,Videos}
@@ -33,7 +33,7 @@ install-terminal-tools:
 	$(PACMAN_CMD) vi vim neovim kitty tmux fish fisher starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit
 
 install-utilities: 
-	$(PACMAN_CMD) picom lxappearance ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils alsa-utils xdg-utils 
+	$(PACMAN_CMD) picom ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils alsa-utils xdg-utils 
 	$(PACMAN_CMD) bluez bluez-utils blueman
 	$(YAY_CMD) ksuperkey redshift
 	sudo systemctl enable ly 
@@ -81,7 +81,8 @@ generate-ssh-key:
 	xclip -sel clip < ~/.ssh/id_rsa.pub
 
 install-docker:
-	$(PACMAN_CMD) docker docker-compose docker-buildx lazydocker
+	$(PACMAN_CMD) docker docker-compose docker-buildx
+	$(YAY_CMD) lazydocker
 	sudo usermod -aG docker $(USER)
 
 install-golang:
