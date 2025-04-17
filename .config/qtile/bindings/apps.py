@@ -3,7 +3,7 @@ from libqtile.config import Key
 from libqtile.lazy import lazy
 
 # Modules and Others Config files
-from .vars import browser, dmenu, dmenu_run, file_manager, maim, mod, term
+from .vars import browser, dmenu, dmenu_run, file_manager, maim, mod, term, clipcat
 
 
 def init_apps_run():
@@ -11,6 +11,7 @@ def init_apps_run():
         Key([mod], "Return", lazy.spawn(term)),
         Key([mod], "b", lazy.spawn(browser)),
         Key([mod], "e", lazy.spawn(file_manager)),
+        Key([mod], "g", lazy.spawn(clipcat)),
         Key(
             [mod],
             "r",
@@ -34,7 +35,7 @@ def init_apps_run():
                     dmenu_prompt=" ",
                     dmenu_font="Iosevka Nerd Font:size=10",
                     commands={
-                        "Lock screen": "betterlockscreen -l dim",
+                        "Lock screen": "slock",
                         "Reboot": "sudo systemctl reboot",
                         "Shutdown": "sudo systemctl poweroff",
                     },

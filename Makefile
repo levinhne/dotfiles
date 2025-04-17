@@ -41,10 +41,7 @@ install-utilities:
 	sudo systemctl enable bluetooth
 
 configure-lockscreen:
-	$(RM_CMD) ~/Downloads/i3lock-color
-	$(GIT_CMD) https://github.com/Raymo111/i3lock-color.git ~/Downloads/i3lock-color
-	cd ~/Downloads/i3lock-color && sudo ./install-i3lock-color.sh
-	wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system
+	$(YAY_CMD) slock
 
 install-filemanager:
 	$(PACMAN_CMD) qt5ct ranger
