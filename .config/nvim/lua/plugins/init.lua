@@ -22,6 +22,4 @@ return {
   -- 
   { import = "plugins.override.copilot" },
   -- { import = "plugins.override.codeium" },
-
-  { import = "plugins.override.kulala" },
 }

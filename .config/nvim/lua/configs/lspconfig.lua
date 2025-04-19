@@ -34,9 +34,9 @@ local servers = {
   eslint = {},
 
   --php
-  intelephense = {
-    filetypes = { "php" },
-  },
+  -- intelephense = {
+  --   filetypes = { "php" },
+  -- },
 
   -- python
   pyright = {
@@ -44,11 +44,11 @@ local servers = {
   },
 
   -- helm
-  helm_ls = {
-    yamlls = {
-      path = "yaml-language-server",
-    },
-  },
+  -- helm_ls = {
+  --   yamlls = {
+  --     path = "yaml-language-server",
+  --   },
+  -- },
 
   yamlls = {},
 
