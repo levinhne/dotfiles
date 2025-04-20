@@ -87,6 +87,7 @@ install-golang:
 
 install-nodejs:
 	$(YAY_CMD) fnm-bin
+	fnm install --lts
 
 install-pyenv:
 	$(YAY_CMD) pyenv

@@ -24,6 +24,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
   callback = function()
     local win = vim.api.nvim_get_current_win()
     vim.wo[win].foldcolumn = "0"
-    vim.wo[win].signcolumn = "no"
+    vim.wo[win].signcolumn = "yes"
   end,
 })

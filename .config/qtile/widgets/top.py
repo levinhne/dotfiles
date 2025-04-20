@@ -86,6 +86,8 @@ def init_widgets(config: dict):
             long_format="%Y-%m-%d %I:%M %p",
             foreground=colors["base05"],
         ),
+        # widget.Spacer(length=10),
+        # widget.Redshift(),
         widget.Spacer(length=5),
     ]
     return widgets
