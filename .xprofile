@@ -29,7 +29,7 @@ dunst &
 
 picom --daemon &
 
-feh --bg-fill ~/.wallpapers/
+xautolock -time 10 -locker "slock" &
 
 # redshift -c ~/.config/redshift/redshift.conf &
 
