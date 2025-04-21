@@ -35,7 +35,7 @@ install-terminal-tools:
 install-utilities: 
 	$(PACMAN_CMD) picom ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver neofetch stow openssh inetutils alsa-utils xdg-utils 
 	$(PACMAN_CMD) bluez bluez-utils blueman
-	$(YAY_CMD) ksuperkey redshift xautolock
+	$(YAY_CMD) ksuperkey redshift xautolock slock 
 	sudo systemctl enable ly 
 	sudo sed -i 's/#AutoEnable=true/AutoEnable=true/g' /etc/bluetooth/main.conf
 	sudo systemctl enable bluetooth
