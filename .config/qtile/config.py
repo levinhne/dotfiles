@@ -123,6 +123,7 @@ auto_minimize = True
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
+wl_xcursor_size = 24
 
 
 @hook.subscribe.startup_once
