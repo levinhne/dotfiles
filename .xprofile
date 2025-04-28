@@ -33,7 +33,7 @@ feh --bg-fill ~/.wallpapers/
 
 xautolock -time 5 -locker "slock" &
 
-# redshift -c ~/.config/redshift/redshift.conf &
+redshift -c ~/.config/redshift/redshift.conf &
 
 clipcatd
 
