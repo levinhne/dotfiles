@@ -33,15 +33,12 @@ install-terminal-tools:
 	$(PACMAN_CMD) vi vim neovim kitty tmux fish fisher starship xclip ripgrep fzf eza bat zoxide feh jq wget htop lazygit
 
 install-utilities: 
-	$(PACMAN_CMD) picom ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver stow openssh inetutils alsa-utils xdg-utils qt5ct
+	$(PACMAN_CMD) picom ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver stow openssh inetutils alsa-utils xdg-utils qt5ct 
 	$(PACMAN_CMD) bluez bluez-utils blueman
-	$(YAY_CMD) ksuperkey redshift xautolock slock 
+	$(YAY_CMD) redshift xautolock slock lxappearance
 	sudo systemctl enable ly 
 	sudo sed -i 's/#AutoEnable=true/AutoEnable=true/g' /etc/bluetooth/main.conf
 	sudo systemctl enable bluetooth
-
-configure-lockscreen:
-	$(YAY_CMD) slock
 
 install-filemanager:
 	$(PACMAN_CMD) ranger
