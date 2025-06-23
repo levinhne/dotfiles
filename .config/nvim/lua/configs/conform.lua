@@ -3,12 +3,9 @@ local options = {
     lua = { "stylua" },
     css = { "prettier" },
     html = { "prettier" },
-    json = { "prettier" },
-    javascript = { { "prettierd", "prettier" } },
-    typescript = { { "prettierd", "prettier" } },
-    typescriptreact = { { "prettierd", "prettier" } },
-    yml = { { "prettierd", "prettier" } },
-    yaml = { { "prettierd", "prettier" } },
+    go = { "goimports", "gofmt" },
+    python = { "isort", "black" },
+    sql = { "sql-formatter" },
   },
 
   format_on_save = {
@@ -18,4 +15,4 @@ local options = {
   },
 }
 
-require("conform").setup(options)
+return options

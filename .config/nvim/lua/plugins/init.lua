@@ -1,25 +1,65 @@
+local cmp = require "cmp"
+
 return {
-  { import = "plugins.override.treesitter" },
-  { import = "plugins.override.neoscroll" },
-  { import = "plugins.override.wilder" },
-  { import = "plugins.override.zoxide" },
-  { import = "plugins.override.visual-multi" },
-  { import = "plugins.override.flash" },
-  -- { import = "plugins.override.indent-blankline" },
-  --
-  { import = "plugins.override.mason" },
-  { import = "plugins.override.cmp" },
-  { import = "plugins.override.lspconfig" },
-  { import = "plugins.override.conform" },
-  { import = "plugins.override.dap" },
-  --
-  { import = "plugins.override.lazygit" },
-  { import = "plugins.override.diffview" },
-  --
-  { import = "plugins.override.go" },
-  { import = "plugins.override.fzf" },
-  -- { import = "plugins.override.helm" },
-  -- 
-  { import = "plugins.override.copilot" },
-  -- { import = "plugins.override.codeium" },
+  {
+    "stevearc/conform.nvim",
+    -- event = 'BufWritePre', -- uncomment for format on save
+    opts = require "configs.conform",
+  },
+
+  -- These are some examples, uncomment them if you want to see them work!
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require "configs.lspconfig"
+    end,
+  },
+  
+
+  -- test new blink
+  -- { import = "nvchad.blink.lazyspec" },
+
+  -- {
+  -- 	"nvim-treesitter/nvim-treesitter",
+  -- 	opts = {
+  -- 		ensure_installed = {
+  -- 			"vim", "lua", "vimdoc",
+  --      "html", "css"
+  -- 		},
+  -- 	},
+  -- },
+
+  -- cmp
+  {
+    "hrsh7th/nvim-cmp",
+    opts = {
+      mapping = {
+        ["<Down>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif require("luasnip").expand_or_jumpable() then
+            require("luasnip").expand_or_jump()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+
+        ["<Up>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif require("luasnip").jumpable(-1) then
+            require("luasnip").jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+      },
+    },
+  },
+  
+  -- ui
+  { import = "plugins.ui.wilder" },
+
+  -- lang
+  { import = "plugins.lang.go" },
 }
