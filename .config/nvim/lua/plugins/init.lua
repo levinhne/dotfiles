@@ -61,4 +61,11 @@ return {
 
   -- lang
   { import = "plugins.lang.go" },
+
+  -- ai 
+  { import = "plugins.ai.copilot"},
+
+  -- tools 
+  { import = "plugins.tools.fzf" }, 
+  { import = "plugins.tools.zoxide" }
 }
