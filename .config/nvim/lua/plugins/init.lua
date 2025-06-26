@@ -65,6 +65,9 @@ return {
   -- ai 
   { import = "plugins.ai.copilot"},
 
+  -- git 
+  { import = "plugins.git.lazygit" },
+
   -- tools 
   { import = "plugins.tools.fzf" }, 
   { import = "plugins.tools.zoxide" }
