@@ -1,0 +1,3 @@
+[submodule ".config/scimax"]
+	path = .config/scimax
+	url = https://github.com/jkitchin/scimax.git

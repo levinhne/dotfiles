@@ -94,6 +94,7 @@ install-virtualbox:
 	sudo modprobe vboxdrv
 
 apply-dotfiles:
+	git submodule foreach git pull
 	rm -rf ~/.bashrc
 	stow . --adopt
 
