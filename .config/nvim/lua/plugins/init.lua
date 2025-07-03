@@ -58,6 +58,8 @@ return {
 
   -- ui
   { import = "plugins.ui.wilder" },
+  { import = "plugins.ui.neoscroll" },
+  { import = "plugins.ui.telescope-file-browser" },
 
   -- lang
   { import = "plugins.lang.go" },
