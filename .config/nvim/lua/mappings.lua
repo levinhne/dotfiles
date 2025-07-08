@@ -15,7 +15,7 @@ vim.opt.mouse = ""
 
 -- map({ "n", "i", "v" }, "<leader>gg", "<cmd>LazyGit<cr>", { desc = "lazygit" })
 
-map("n", "<leader>e", ":Telescope file_browser<CR>")
+map("n", "<leader>fe", ":Telescope file_browser<CR>")
 
 map("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "lsp restart" })
 
