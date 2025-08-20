@@ -16,7 +16,7 @@
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS O
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -25,24 +25,138 @@
 # SOFTWARE.
 
 import os
-import subprocess
-from libqtile import bar, hook
-from libqtile.config import Screen, Match
 
-from layouts.settings import init_layouts
-from libqtile.layout import floating
-from widgets.top import init_widgets
+import libqtile.resources
+from libqtile import bar, layout, qtile, widget
+from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.lazy import lazy
+from libqtile.utils import guess_terminal
 
-from bindings.cores import init_keys
-from bindings.groups import init_groups_keys, init_groups_keys
-from bindings.apps import init_apps_run
-from bindings.mouse import init_mouse_keys
+from widgets.clock import MouseOverClock
 
-from groups.creator import init_name_creator
+colors = {
+    "base00": "#282936",
+    "base01": "#3a3c4e",
+    "base02": "#4d4f68",
+    "base03": "#626483",
+    "base04": "#62d6e8",
+    "base05": "#e9e9f4",
+    "base06": "#f1f2f8",
+    "base07": "#f7f7fb",
+    "base08": "#ea51b2",
+    "base09": "#b45bcf",
+    "base0A": "#00f769",
+    "base0B": "#ebff87",
+    "base0C": "#a1efe4",
+    "base0D": "#62d6e8",
+    "base0E": "#b45bcf",
+    "base0F": "#00f769",
+}
 
-from themes.dracula import Dracula
+mod = "mod4"
+terminal = guess_terminal("kitty")
 
-colors = Dracula()
+keys = [
+    # A list of available commands that can be bound to keys can be found
+    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
+    # Switch between windows
+    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
+    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
+    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
+    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
+    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    # Move windows between left/right columns or move up/down in current stack.
+    # Moving out of range in Columns layout will create new column.
+    Key(
+        [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
+    ),
+    Key(
+        [mod, "shift"],
+        "l",
+        lazy.layout.shuffle_right(),
+        desc="Move window to the right",
+    ),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+    # Grow windows. If current window is on the edge of screen and direction
+    # will be to screen edge - window would shrink.
+    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
+    Key(
+        [mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"
+    ),
+    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
+    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    # Toggle between split and unsplit sides of stack.
+    # Split = all windows displayed
+    # Unsplit = 1 window displayed, like Max layout, but still with
+    # multiple stack panes
+    Key(
+        [mod, "shift"],
+        "Return",
+        lazy.layout.toggle_split(),
+        desc="Toggle between split and unsplit sides of stack",
+    ),
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    # Toggle between different layouts as defined below
+    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    Key(
+        [mod],
+        "f",
+        lazy.window.toggle_fullscreen(),
+        desc="Toggle fullscreen on the focused window",
+    ),
+    Key(
+        [mod],
+        "t",
+        lazy.window.toggle_floating(),
+        desc="Toggle floating on the focused window",
+    ),
+    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+]
+
+# Add key bindings to switch VTs in Wayland.
+# We can't check qtile.core.name in default config as it is loaded before qtile is started
+# We therefore defer the check until the key binding is run by using .when(func=...)
+for vt in range(1, 8):
+    keys.append(
+        Key(
+            ["control", "mod1"],
+            f"f{vt}",
+            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
+            desc=f"Switch to VT{vt}",
+        )
+    )
+
+
+groups = [Group(i) for i in "123456789"]
+
+for i in groups:
+    keys.extend(
+        [
+            # mod + group number = switch to group
+            Key(
+                [mod],
+                i.name,
+                lazy.group[i.name].toscreen(),
+                desc=f"Switch to group {i.name}",
+            ),
+            # mod + shift + group number = switch to & move focused window to group
+            Key(
+                [mod, "shift"],
+                i.name,
+                lazy.window.togroup(i.name, switch_group=True),
+                desc=f"Switch to & move focused window to group {i.name}",
+            ),
+            # Or, use below if you prefer not to switch to that group.
+            # # mod + shift + group number = move focused window to group
+            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
+            #     desc="move focused window to group {}".format(i.name)),
+        ]
+    )
 
 layout_theme = dict(
     margin=5,
@@ -51,35 +165,120 @@ layout_theme = dict(
     border_normal=colors["base02"],
 )
 
-layouts = init_layouts(layout_theme)
-keys = init_keys()
-groups = init_name_creator()
-groups_bind = init_groups_keys()
-keys.extend(groups_bind)
-apps = init_apps_run()
-keys.extend(apps)
+layouts = [
+    layout.Columns(**layout_theme),
+    layout.Max(),
+    # Try more layouts by unleashing below layouts.
+    # layout.Stack(
+    #     num_stacks=2,
+    # ),
+    # layout.Bsp(),
+    # layout.Matrix(),
+    # layout.MonadTall(),
+    # layout.MonadWide(),
+    # layout.RatioTile(),
+    # layout.Tile(),
+    # layout.TreeTab(),
+    # layout.VerticalTile(),
+    # layout.Zoomy(),
+]
 
 widget_defaults = dict(
     font="Iosevka Nerd Font SemiBold",
     fontsize=14,
     padding=3,
-    colors=colors,
 )
 extension_defaults = widget_defaults.copy()
-widgets_theme = widget_defaults.copy()
 
-
-def init_bar():
-    return bar.Bar(
-        init_widgets(widgets_theme),
-        30,
-        background=colors["base00"],
-    )
-
-
+logo = os.path.join(os.path.dirname(libqtile.resources.__file__), "logo.png")
 screens = [
     Screen(
-        top=init_bar(),
+        top=bar.Bar(
+            [
+                widget.Spacer(length=5),
+                widget.CurrentLayout(
+                    foreground=colors["base05"],
+                    custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
+                ),
+                widget.Spacer(length=5),
+                widget.GroupBox(
+                    margin_y=5,
+                    padding_y=0,
+                    padding_x=3,
+                    borderwidth=0,
+                    disable_drag=True,
+                    highlight_method="line",
+                    fontsize=15,
+                    active=colors["base03"],
+                    inactive=colors["base01"],
+                    highlight_color=colors["base00"],
+                    this_current_screen_border=colors["base00"],
+                    block_highlight_text_color=colors["base09"],
+                ),
+                widget.Spacer(length=5),
+                widget.Prompt(),
+                widget.Spacer(length=5),
+                widget.WindowName(
+                    max_chars=50,
+                    foreground=colors["base05"],
+                ),
+                widget.TextBox(
+                    text="",
+                    foreground=colors["base05"],
+                ),
+                widget.Spacer(length=2),
+                widget.Volume(
+                    limit_max_volume=True,
+                    fmt="{}",
+                    foreground=colors["base05"],
+                ),
+                widget.Spacer(length=10),
+                widget.TextBox(
+                    text="󰤨 ",
+                    foreground=colors["base05"],
+                ),
+                widget.Net(
+                    format="{down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
+                    foreground=colors["base05"],
+                ),
+                widget.Spacer(length=10),
+                widget.TextBox(
+                    text=" ",
+                    foreground=colors["base05"],
+                ),
+                widget.CPU(
+                    format="{freq_current}GHz {load_percent}%",
+                    foreground=colors["base05"],
+                ),
+                widget.Spacer(length=10),
+                widget.TextBox(
+                    text=" ",
+                    foreground=colors["base05"],
+                ),
+                widget.Memory(
+                    format="{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}",
+                    foreground=colors["base05"],
+                ),
+                widget.TextBox(
+                    text=" ",
+                    foreground=colors["base05"],
+                ),
+                MouseOverClock(
+                    format="%I:%M %p",
+                    long_format="%Y-%m-%d %I:%M %p",
+                    foreground=colors["base0E"],
+                ),
+                # widget.Spacer(length=10),
+                # widget.Redshift(),
+                widget.Spacer(length=5),
+            ],
+            30,
+            background=colors["base00"],
+            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+        ),
+        wallpaper=os.path.expanduser("~/.wallpapers/backgroud-1.jpg"),
+        wallpaper_mode="center",
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
@@ -88,7 +287,18 @@ screens = [
 ]
 
 # Drag floating layouts.
-mouse = init_mouse_keys()
+mouse = [
+    Drag(
+        [mod],
+        "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
+    Click([mod], "Button2", lazy.window.bring_to_front()),
+]
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
@@ -96,28 +306,21 @@ follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
-floating_layout = floating.Floating(
-    border_width=2,
-    border_focus=colors["base08"],
-    border_normal=colors["base02"],
+floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
-        *floating.Floating.default_float_rules,
+        *layout.Floating.default_float_rules,
         Match(wm_class="confirmreset"),  # gitk
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk
         Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(wm_class="Pcmanfm"),
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
-        Match(wm_class="blueman-manager"),
-        Match(wm_class="lxappearance"),
-        Match(wm_class='ssh-askpass'),  # ssh-askpass
-    ],
+    ]
 )
-
 auto_fullscreen = True
 focus_on_window_activation = "smart"
+focus_previous_on_window_remove = False
 reconfigure_screens = True
 
 # If things like steam games want to auto-minimize themselves when losing
@@ -126,14 +329,9 @@ auto_minimize = True
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
+
+# xcursor theme (string or None) and size (integer) for Wayland backend
 wl_xcursor_size = 24
-
-
-@hook.subscribe.startup_once
-def start_once():
-    home = os.path.expanduser("~")
-    subprocess.call([home + "/.config/qtile/autostart.sh"])
-
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

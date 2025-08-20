@@ -12,13 +12,16 @@ export QT4_IM_MODULE=ibus
 export CLUTTER_IM_MODULE=ibus
 
 xrandr -r 75
+
 amddp=$(xrandr --query | grep '^DP-1')
 if [[ $amddp = *\ connected* ]]; then
   xrandr --output DP-1 --mode 1920x1080 --rate 60 --right-of HDMI-1
 fi
 
+xsetroot -cursor_name left_ptr
+
 # Kill already running process
-_ps=(dunst ksuperkey)
+_ps=(dunst)
 for _prs in "${_ps[@]}"; do
 	if [[ `pidof ${_prs}` ]]; then
 		killall -9 ${_prs}
