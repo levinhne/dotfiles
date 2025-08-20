@@ -56,10 +56,7 @@ install-themes:
 	$(YAY_CMD) dracula-gtk-theme papirus-icon-theme papirus-folders
 	papirus-folders -C indigo --theme Papirus-Dark
 
-	$(RM_CMD) ~/Downloads/Qogir-Cursors-Recolored 
-	mkdir -p ~/.local/share/icons
-	$(GIT_CMD) https://github.com/TeddyBearKilla/Qogir-Cursors-Recolored --depth=1 ~/Downloads/Qogir-Cursors-Recolored
-	cd ~/Downloads/Qogir-Cursors-Recolored/colors/Dracula/Purple && ./install.sh
+	$(YAY_CMD) xcursor-retrosmart
 
 install-fonts:
 	$(YAY_CMD) noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-fira-code ttf-firacode-nerd ttf-iosevka-nerd ttf-liberation ttf-font-awesome
