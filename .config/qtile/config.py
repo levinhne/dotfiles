@@ -27,8 +27,10 @@
 import os
 
 import libqtile.resources
-from libqtile import bar, layout, qtile, widget
+from libqtile import bar, extension, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
+
+# from libqtile.layout import columns, max, tree, xmonad
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
@@ -55,6 +57,9 @@ colors = {
 
 mod = "mod4"
 terminal = guess_terminal("kitty")
+dmenu = "dmenu -c -h 35"
+dmenu_run = "dmenu_run -c -h 35"
+maim = "maim -s | xclip -selection clipboard -t image/png"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -115,7 +120,39 @@ keys = [
     ),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    # Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key(
+        [mod],
+        "r",
+        lazy.run_extension(
+            extension.DmenuRun(
+                dmenu_command=dmenu_run,
+                dmenu_prompt=" ",
+                dmenu_font="Iosevka Nerd Font:size=10",
+            )
+        ),
+    ),
+    Key(
+        [
+            mod,
+            "shift",
+        ],
+        "x",
+        lazy.run_extension(
+            extension.CommandSet(
+                dmenu_command=dmenu,
+                dmenu_prompt=" ",
+                dmenu_font="Iosevka Nerd Font:size=10",
+                commands={
+                    "Lock screen": "slock",
+                    "Reboot": "sudo systemctl reboot",
+                    "Shutdown": "sudo systemctl poweroff",
+                },
+            )
+        ),
+        desc="",
+    ),
+    Key([mod], "s", lazy.spawn(maim, shell=True)),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -158,16 +195,20 @@ for i in groups:
         ]
     )
 
-layout_theme = dict(
+layout_config = dict(
     margin=5,
     border_width=2,
     border_focus=colors["base08"],
     border_normal=colors["base02"],
 )
 
+max_layout_config = layout_config.copy()
+
+max_layout_config.update({"border_width": 0})
+
 layouts = [
-    layout.Columns(**layout_theme),
-    layout.Max(),
+    layout.Columns(**layout_config),
+    layout.Max(**max_layout_config),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(
     #     num_stacks=2,
@@ -266,7 +307,7 @@ screens = [
                 MouseOverClock(
                     format="%I:%M %p",
                     long_format="%Y-%m-%d %I:%M %p",
-                    foreground=colors["base0E"],
+                    foreground=colors["base05"],
                 ),
                 # widget.Spacer(length=10),
                 # widget.Redshift(),
@@ -277,8 +318,8 @@ screens = [
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
-        wallpaper=os.path.expanduser("~/.wallpapers/backgroud-1.jpg"),
-        wallpaper_mode="center",
+        # wallpaper=os.path.expanduser("~/.wallpapers/backgroud-1.jpg"),
+        # wallpaper_mode="center",
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
@@ -307,6 +348,9 @@ bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
+    border_width=2,
+    border_focus=colors["base08"],
+    border_normal=colors["base02"],
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -316,7 +360,8 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
-    ]
+        Match(title="lxappearance"),  # Screenshot utility
+    ],
 )
 auto_fullscreen = True
 focus_on_window_activation = "smart"
