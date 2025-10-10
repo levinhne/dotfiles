@@ -9,23 +9,6 @@ RM_CMD = rm -rf
 
 install: setup-folders install-yay install-xorg install-qtile install-terminal-tools install-utilities install-filemanager install-dmenu configure-ibus install-fonts install-golang install-nodejs configure-sudoers apply-dotfiles
 
-install-chaotic-aur:
-	@echo "==> Importing Chaotic AUR GPG key..."
-	sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-	sudo pacman-key --lsign-key 3056513887B78AEB
-
-	@echo "==> Installing chaotic-keyring and chaotic-mirrorlist..."
-	sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
-	sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-
-	@echo "==> Adding Chaotic AUR repo to /etc/pacman.conf..."
-	@echo "" | sudo tee -a /etc/pacman.conf > /dev/null
-	@echo "[chaotic-aur]" | sudo tee -a /etc/pacman.conf > /dev/null
-	@echo "Include = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf > /dev/null
-
-	@echo "==> Updating system and syncing Chaotic AUR mirrorlist..."
-	sudo pacman -Syu
-
 setup-folders:
 	cd ~ && mkdir -p {Desktop,Develop,Documents,Downloads,Pictures,Pictures/Wallpapers,Videos}
 	sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
@@ -106,6 +89,10 @@ install-pyenv:
 install-virtualbox:
 	$(PACMAN_CMD) linux-headers virtualbox virtualbox-guest-utils
 	sudo modprobe vboxdrv
+
+install-browser:
+	$(YAY_CMD) google-chrome
+	$(YAY_CMD) qutebrowser tldextract
 
 apply-dotfiles:
 	git submodule foreach git pull
