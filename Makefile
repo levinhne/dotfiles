@@ -7,7 +7,7 @@ YAY_CMD = yay -S --noconfirm
 GIT_CMD = git clone
 RM_CMD = rm -rf
 
-install: install-chaotic-aur setup-folders install-yay install-xorg install-qtile install-terminal-tools install-utilities install-filemanager install-dmenu configure-ibus install-themes install-fonts install-golang install-nodejs configure-sudoers apply-dotfiles
+install: setup-folders install-yay install-xorg install-qtile install-terminal-tools install-utilities install-filemanager install-dmenu configure-ibus install-fonts install-golang install-nodejs configure-sudoers apply-dotfiles
 
 install-chaotic-aur:
 	@echo "==> Importing Chaotic AUR GPG key..."
