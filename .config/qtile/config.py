@@ -361,6 +361,7 @@ floating_layout = layout.Floating(
         Match(wm_class="lxappearance"),  # Screenshot utility
         Match(wm_class="mpv"),
         Match(wm_class="pinentry-gtk"),
+        Match(wm_class="VirtualBox Manager"),
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
     ],
