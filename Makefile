@@ -35,10 +35,11 @@ install-terminal-tools:
 install-utilities: 
 	$(PACMAN_CMD) picom ly maim dunst gzip zip unzip p7zip unrar unarchiver xarchiver stow openssh inetutils alsa-utils xdg-utils qt5ct 
 	$(PACMAN_CMD) bluez bluez-utils blueman
-	$(YAY_CMD) redshift xautolock slock lxappearance
-	sudo systemctl enable ly 
 	sudo sed -i 's/#AutoEnable=true/AutoEnable=true/g' /etc/bluetooth/main.conf
 	sudo systemctl enable bluetooth
+	$(YAY_CMD) redshift xautolock slock lxappearance
+	systemctl enable ly@tty2.service
+	sudo sed -i 's/^animation *= *none/animation = colormix/' /etc/ly/config.ini
 
 install-filemanager:
 	$(PACMAN_CMD) ranger
