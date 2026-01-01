@@ -7,7 +7,7 @@ YAY_CMD = yay -S --noconfirm
 GIT_CMD = git clone
 RM_CMD = rm -rf
 
-install: setup-folders install-yay install-xorg install-qtile install-terminal-tools install-utilities install-filemanager install-dmenu configure-ibus install-fonts install-golang install-nodejs configure-sudoers apply-dotfiles
+install: setup-folders install-yay install-xorg install-qtile install-terminal-tools install-utilities install-filemanager configure-ibus install-themes install-fonts install-browser install-golang install-nodejs configure-sudoers apply-dotfiles
 
 setup-folders:
 	cd ~ && mkdir -p {Desktop,Develop,Documents,Downloads,Pictures,Pictures/Wallpapers,Videos}
@@ -83,9 +83,6 @@ install-golang:
 install-nodejs:
 	$(YAY_CMD) fnm-bin
 	fnm install --lts
-
-install-pyenv:
-	$(YAY_CMD) pyenv
 
 install-virtualbox:
 	$(PACMAN_CMD) linux-headers virtualbox virtualbox-guest-utils
