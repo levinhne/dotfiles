@@ -38,7 +38,7 @@ install-utilities:
 	sudo sed -i 's/#AutoEnable=true/AutoEnable=true/g' /etc/bluetooth/main.conf
 	sudo systemctl enable bluetooth
 	$(YAY_CMD) redshift xautolock slock lxappearance
-	systemctl enable ly@tty2.service
+	sudo systemctl enable ly@tty2.service
 	sudo sed -i 's/^animation *= *none/animation = colormix/' /etc/ly/config.ini
 
 install-filemanager:
